@@ -116,7 +116,7 @@ export const DashBoardScreen = () => {
         </TouchableOpacity>
         <View style={style.containerTransacoes}>
           <View style={style.title}>
-            <View>
+            <View style={style.containerTextTransacoes}>
               <Text style={style.textTransacoes}>TRANSAÇÕES</Text>
             </View>
           </View>
@@ -162,6 +162,7 @@ export const DashBoardScreen = () => {
               <FlatList
                 data={formattedDates}
                 style={style.flatList}
+                showsVerticalScrollIndicator={false}
                 renderItem={({ index }) => {
                   return (
                     <>

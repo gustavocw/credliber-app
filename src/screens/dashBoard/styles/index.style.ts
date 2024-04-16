@@ -50,7 +50,7 @@ export const style = StyleSheet.create({
     height: 24,
   },
   painel: {
-    marginTop: 20,
+    marginTop: 6,
     display: 'flex',
     width: 350,
     height: 121,
@@ -109,7 +109,7 @@ export const style = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
   },
   newSimulation: {
-    top: 20,
+    top: 10,
     width: 350,
     height: 73,
     borderRadius: 10,
@@ -154,7 +154,11 @@ export const style = StyleSheet.create({
     position: 'relative',
     top: 38,
     width: '100%',
-    height: 430,
+    height: 530,
+  },
+  containerTextTransacoes:{
+    width:400,
+    height:"100%",
   },
   textTransacoes: {
     position: 'relative',
@@ -176,8 +180,11 @@ export const style = StyleSheet.create({
     right: 26,
   },
   title: {
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
     width: '100%',
-    height: '7%',
+    height: '10%',
   },
   iconSearch: {
     marginLeft: 15,
