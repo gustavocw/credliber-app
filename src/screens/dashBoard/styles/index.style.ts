@@ -158,7 +158,8 @@ export const style = StyleSheet.create({
     position: 'relative',
     top: 18,
     width: '100%',
-    height: 480,
+    height: "57%",
+    // backgroundColor:"black"
   },
   containerTextTransacoes:{
     width:390,

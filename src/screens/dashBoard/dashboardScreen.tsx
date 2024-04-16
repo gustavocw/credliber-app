@@ -62,7 +62,7 @@ export const DashBoardScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <SafeAreaView style={{ flex:1 }}>
+      <SafeAreaView edges={['right', 'bottom', 'left', 'top']} style={{ flex:1 }}>
       <View style={style.container}>
         <View style={style.containerTopDash}>
           <View style={style.containerPerfil}>
