@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 
 import { style } from './styles/index.style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 type DetailsTransacoesRouteProp = RouteProp<RootStackParamList, 'DetailsTransection'>;
 
 export const DetailsTransection = (prop: any) => {
@@ -16,14 +17,15 @@ export const DetailsTransection = (prop: any) => {
 
   return (
     <>
-      <View style={style.container}>
+    <SafeAreaView edges={[ 'bottom', 'left', 'right', 'top' ]} style={{ flex:1, }}>
+    <View style={style.container}>
         <View style={style.titleContainer}>
           <ButtonBack title="Detalhes da transação" subTitle="" />
         </View>
         <View style={style.containerDash}>
           <View style={style.dash}>
             <View style={style.textDash}>
-              <Text style={style.titleDash}>Destinatário</Text>
+              <Text style={[style.titleDash, { left:10, }]}>Destinatário</Text>
               <Text style={style.nameDash}>{transacao.customer.name}</Text>
             </View>
             <TouchableOpacity style={style.buttonNext}>
@@ -101,6 +103,7 @@ export const DetailsTransection = (prop: any) => {
           </View>
         </View>
       </View>
+    </SafeAreaView>
     </>
   );
 };

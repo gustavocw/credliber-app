@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 5,
   },
   titleContainer: {
     position: 'relative',
@@ -28,7 +28,7 @@ export const style = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     top: 50,
-    width: '90%',
+    width: '85%',
     height: 100,
     borderRadius: 10,
     backgroundColor: '#F7F7F7',
@@ -48,7 +48,7 @@ export const style = StyleSheet.create({
   nameDash: {
     fontSize: 18,
     position: 'relative',
-    left: 20,
+    left: 10,
     fontFamily: 'Montserrat_600SemiBold',
   },
   textDash: {
