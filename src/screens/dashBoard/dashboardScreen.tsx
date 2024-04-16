@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { style } from './styles/index.style';
 import ListTransaction from './transactionList/transactionList';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type DashTypeNavigation = StackNavigationProp<RootStackParamList, 'Dashboard'>;
 export const DashBoardScreen = () => {
@@ -61,6 +62,7 @@ export const DashBoardScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <SafeAreaView edges={['right', 'bottom', 'left', 'top']} style={{ flex:1 }}>
       <View style={style.container}>
         <View style={style.containerTopDash}>
           <View style={style.containerPerfil}>
@@ -114,7 +116,7 @@ export const DashBoardScreen = () => {
         </TouchableOpacity>
         <View style={style.containerTransacoes}>
           <View style={style.title}>
-            <View>
+            <View style={style.containerTextTransacoes}>
               <Text style={style.textTransacoes}>TRANSAÇÕES</Text>
             </View>
           </View>
@@ -160,6 +162,7 @@ export const DashBoardScreen = () => {
               <FlatList
                 data={formattedDates}
                 style={style.flatList}
+                showsVerticalScrollIndicator={false}
                 renderItem={({ index }) => {
                   return (
                     <>
@@ -173,6 +176,8 @@ export const DashBoardScreen = () => {
           </View>
         </View>
       </View>
+      </SafeAreaView>
+      
     </KeyboardAvoidingView>
   );
 };
