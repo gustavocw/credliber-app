@@ -64,8 +64,9 @@ const LoginScreen = () => {
       validationSchema,
       onSubmit: async (values: SignInInput) => {
         try {
-          await signIn(values);
-          await AsyncStorage.setItem(ASYNC_STORAGE_LOGIN, values.cpf || '');
+          console.log("AAAAAAAAAAA")
+          // await signIn(values);
+          // await AsyncStorage.setItem(ASYNC_STORAGE_LOGIN, values.cpf || '');
           navigation.navigate('Dashboard');
         } catch (error) {
           console.error(error);

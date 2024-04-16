@@ -4,7 +4,7 @@ const screenHeight = Dimensions.get('window').height;
 
 export const style = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     width: screenWidth,
     height: screenHeight,
@@ -24,7 +24,7 @@ export const style = StyleSheet.create({
     alignItems: 'center',
     width: '50%',
     height: '100%',
-    marginLeft: 30,
+    marginLeft: 40,
   },
   containerImagePerfil: {
     width: '30%',
@@ -42,7 +42,7 @@ export const style = StyleSheet.create({
     alignItems: 'center',
     width: '20%',
     height: '100%',
-    marginRight: 30,
+    marginRight: 45,
   },
   icons: {
     marginLeft: 17,
