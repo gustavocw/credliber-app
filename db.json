@@ -1,0 +1,57 @@
+{
+    "name":"Luiz Miller",
+    "cpf":"244.877.667.22",
+    "senha":"123689",
+    "photo":"./src/assets/icons/dash/userGeneric.png",
+    "saldo":"2.642,79",
+    "extrato":[
+        {
+        "id":"2kjhgshdjfkglhoijhs890",
+        "data":"14/fev/2024",
+        "transacoes":[
+            {
+            "id":"234567890",
+            "nome":"Carla Almeida",
+            "valor":"R$132,00",
+            "horario":"13:00",
+            "situacao":"concluida",
+            "taxa":"8,50",
+            "percent":"05%"
+        }
+    ]
+    },
+    {
+        "id":"2kjhgshdasfghgftyu765433rty789iuhgfd",
+        "data":"13/fev/2024",
+        "transacoes":[
+            {
+            "id":"21093284huebfdjskaloqwe3i4juhyt",
+            "nome":"Sarah Fernandes",
+            "valor":"R$132,00",
+            "horario":"18:12",
+            "situacao":"concluida",
+            "taxa":"8,50",
+            "percent":"05%"
+        },
+        {
+            "id":"21093284huebfdjskaloqssasfwe",
+            "nome":"Marcos Santiago",
+            "valor":"R$170,00",
+            "horario":"09:59",
+            "situacao":"pendente",
+            "taxa":"8,50",
+            "percent":"05%"
+        },
+        {
+            "id":"21093284huebfdjskaloqwe3i4juhytskejhgrfvgy",
+            "nome":"Rafael Pereira",
+            "valor":"R$170,00",
+            "horario":"07:00",
+            "situacao":"erro",
+            "taxa":"8,50",
+            "percent":"05%"
+        }
+    ]
+    }
+]
+}
