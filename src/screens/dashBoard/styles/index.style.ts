@@ -25,7 +25,7 @@ export const style = StyleSheet.create({
     alignItems: 'center',
     width: '50%',
     height: '100%',
-    marginLeft: 40,
+    marginLeft: 30,
   },
   containerImagePerfil: {
     width: '30%',
