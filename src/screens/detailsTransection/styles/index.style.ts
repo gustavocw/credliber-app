@@ -121,7 +121,7 @@ export const style = StyleSheet.create({
     borderWidth: 0.4,
   },
   containerAjuda: {
-    width: '90%',
+    width: '85%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
