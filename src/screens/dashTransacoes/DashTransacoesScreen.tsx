@@ -35,14 +35,13 @@ export const DashTransacoes = () => {
   const {
     dataSimulation,
     selectedMonth,
-    setSelectedMonth,
+    handleMonthClick,
     showInfo,
     toggleView,
     filterTransactionsByMonth,
     formattedDates,
     months,
   } = useDashboardTransactions(chave);
-
   const formattedValue = dataSimulation
     ? (dataSimulation.value / 100).toLocaleString('pt-BR', {
         style: 'currency',
@@ -64,22 +63,21 @@ export const DashTransacoes = () => {
   useEffect(() => {
     const monthCounts: Record<string, number> = {};
     chartData.forEach((data) => {
-      const month = parseInt(data.date.split('-')[0], 10) - 1;
-      monthCounts[months[month]] = (monthCounts[months[month]] || 0) + data.total;
+      const monthIndex = parseInt(data.date.split('-')[0], 10) - 1;
+      const month = months[monthIndex];
+      if (month) {
+        monthCounts[month] = (monthCounts[month] || 0) + data.count;
+      }
     });
     setTransactionCounts(monthCounts);
-  }, [chartData]);
-
-  const handleMonthClick = (month: string) => {
-    setSelectedMonth(selectedMonth === month ? null : month);
-  };
+  }, [chartData, months]);
 
   useEffect(() => {
-    const callChart = async () => {
+    const fetchData = async () => {
       await loadChartTransactions();
     };
-    callChart();
-  }, []);
+    fetchData();
+  }, [chave]);
 
   const renderMonths = () => (
     <FlatList
@@ -90,7 +88,7 @@ export const DashTransacoes = () => {
       renderItem={({ item }) => {
         const count = transactionCounts[item] || 0;
         const baseHeight = 10;
-        const height = Math.min(baseHeight + count / 10);
+        const height = Math.min(80, baseHeight + count / 10);
 
         return (
           <View style={style.monthContainer}>
