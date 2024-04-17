@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 5,
   },
   titleContainer: {
     position: 'relative',
@@ -27,8 +27,8 @@ export const style = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
-    top: 50,
-    width: '90%',
+    top: -4,
+    width: '87%',
     height: 100,
     borderRadius: 10,
     backgroundColor: '#F7F7F7',
@@ -48,7 +48,7 @@ export const style = StyleSheet.create({
   nameDash: {
     fontSize: 18,
     position: 'relative',
-    left: 20,
+    left: 10,
     fontFamily: 'Montserrat_600SemiBold',
   },
   textDash: {
@@ -70,7 +70,7 @@ export const style = StyleSheet.create({
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
-    top: 80,
+    top: 20,
     width: '100%',
     height: 200,
   },
@@ -105,7 +105,7 @@ export const style = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'row',
-    top: 80,
+    top: 30,
     width: '100%',
     height: 100,
   },
@@ -121,13 +121,13 @@ export const style = StyleSheet.create({
     borderWidth: 0.4,
   },
   containerAjuda: {
-    width: '90%',
+    width: '85%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 60,
     position: 'relative',
-    top: 60,
+    top: 10,
   },
   help: {
     display: 'flex',

@@ -12,7 +12,7 @@ export const style = StyleSheet.create({
     width: 350,
     alignSelf: 'center',
     height: 40,
-    paddingTop: 40,
+    paddingTop: 4,
     paddingBottom: 20,
   },
   containerHeaderProgresso: {
@@ -32,8 +32,9 @@ export const style = StyleSheet.create({
     position: 'relative',
     paddingTop: 90,
     width: 350,
-    height: '100%',
+    height: '95%',
     display: 'flex',
+    alignItems:"center",
     alignSelf: 'center',
     gap: 10,
   },
@@ -41,7 +42,7 @@ export const style = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    marginLeft: 10,
+    // marginLeft: 10,
     fontSize: 12,
     fontFamily: 'Montserrat_500Medium',
     color: 'black',
@@ -53,6 +54,11 @@ export const style = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     color: 'black',
   },
+  containerLabelInput:{
+      width:"97%",
+      height:15,
+      // backgroundColor:'black'
+  },
   input: {
     borderWidth: 0.5,
     borderColor: '#0C0E13',
@@ -60,7 +66,7 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width: 326,
+    width: "97%",
     height: 44,
     alignSelf: 'center',
   },
@@ -72,7 +78,7 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
   },
   halfInputContainer: {
-    width: 160,
+    width: "47%",
     display: 'flex',
     alignSelf: 'center',
   },

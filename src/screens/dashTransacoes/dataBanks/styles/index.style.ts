@@ -23,15 +23,19 @@ export const style = StyleSheet.create({
     height: 40,
     gap: 3,
   },
+  containerLabelTextInput:{
+    width:"94%",
+  },
   selectInput: {
     zIndex: 9999,
-    borderWidth: 0.3,
+    // borderWidth: 0.3,
     borderColor: '#9F9F9F',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
     width: 350,
     height: 42,
+    marginTop:-11,
     alignSelf: 'center',
   },
   typePixSelect: {
@@ -84,6 +88,7 @@ export const style = StyleSheet.create({
     width: '100%',
     height: '100%',
     display: 'flex',
+    alignItems:"center"
   },
   inputAreaPix: {
     borderWidth: 0.5,
@@ -109,9 +114,13 @@ export const style = StyleSheet.create({
   },
   containerInput: {
     width: '98%',
-    height: 80,
+    borderWidth: 0.5,
+    borderColor: '#0C0E13',
+    borderRadius: 8,
+    height: 45,
     display: 'flex',
     justifyContent: 'center',
+    marginTop:5,
     alignItems: 'center',
   },
   containerButton: {

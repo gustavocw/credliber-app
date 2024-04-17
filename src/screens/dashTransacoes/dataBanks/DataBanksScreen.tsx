@@ -67,12 +67,14 @@ export const DataBanks = () => {
             <View>
               <Text style={style.label}>Tipo de conta</Text>
               <View style={style.inputAreaGroupCheck}>
-                <CheckboxCred label="Poupança" onCheck={() => handlePoupança(1)} />
-                <CheckboxCred label="Conta corrente" onCheck={() => handlePoupança(2)} />
-              </View>
+                <CheckboxCred label="    Poupança" onCheck={() => handlePoupança(1)} />
+                <CheckboxCred  label="   Conta corrente" onCheck={() => handlePoupança(2)} />
+            </View>
             </View>
           </View>
-          <Text style={style.label}>Banco</Text>
+          <View style={style.containerLabelTextInput}>
+            <Text style={style.label}>Banco</Text>
+          </View>
           <View style={style.containerInput}>
             <RNPickerSelect
               onValueChange={(value: string) => updateField('bank', value)}
@@ -109,7 +111,7 @@ export const DataBanks = () => {
               </View>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View>
               <RNPickerSelect
                 onValueChange={(value: string) => updateField('pixType', value)}
@@ -131,7 +133,7 @@ export const DataBanks = () => {
                 />
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
       </View>
       <View style={style.continueButton}>
