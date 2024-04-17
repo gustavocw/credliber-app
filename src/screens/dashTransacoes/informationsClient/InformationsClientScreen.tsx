@@ -55,7 +55,9 @@ export const InformationsClient = () => {
             </View>
           </View>
           <View style={style.form}>
-            <Text style={style.label}>Nome Completo</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>Nome Completo</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient.name}
@@ -65,7 +67,9 @@ export const InformationsClient = () => {
                 autoFocus
               />
             </View>
-            <Text style={style.label}>E-mail</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>E-mail</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient.email}
@@ -75,7 +79,9 @@ export const InformationsClient = () => {
                 autoFocus
               />
             </View>
-            <Text style={style.label}>CPF</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>CPF</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient.cpf}
@@ -85,7 +91,9 @@ export const InformationsClient = () => {
                 keyboardType="numeric"
               />
             </View>
-            <Text style={style.label}>RG</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>RG</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient.rg}
@@ -110,7 +118,7 @@ export const InformationsClient = () => {
               </View>
               <View style={style.containerGroup}>
                 <Text style={style.label2}>UF de emissão</Text>
-                <View style={style.containerInputGroup}>
+                <View style={style.containerUf}>
                   <RNPickerSelect
                     value={dataClient?.edit2}
                     onValueChange={(value: string) => updateField('edit2', value)}
@@ -124,7 +132,9 @@ export const InformationsClient = () => {
                 </View>
               </View>
             </View>
-            <Text style={style.label}>Órgão emissor</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>Órgão emissor</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient?.edit3}
@@ -133,7 +143,9 @@ export const InformationsClient = () => {
                 style={style.inputArea}
               />
             </View>
-            <Text style={style.label}>Data de nascimento</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>Data de nascimento</Text>
+            </View>
             <View style={style.containerInput}>
               <TextInput
                 value={dataClient.birthDate}

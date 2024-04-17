@@ -162,13 +162,14 @@ export const style = StyleSheet.create({
     // backgroundColor:"black"
   },
   containerTextTransacoes:{
-    width:390,
+    width:"87%",
     height:"100%",
+    // backgroundColor:'black',
   },
   textTransacoes: {
     position: 'relative',
     top: 16,
-    left: 20,
+    left: 2,
     fontSize: 16,
     fontFamily: 'Montserrat_600SemiBold',
   },
@@ -177,13 +178,15 @@ export const style = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent:"center",
-    width: 336,
-    height: 40,
+    width: "87%",
+    height: 47,
     backgroundColor: '#F7F7F7',
+    borderRadius: 4,
+    borderWidth:0.2,
+    borderColor:"black",
     position: 'relative',
-    top: 5,
-    borderRadius: 8,
-    right: 16,
+    top: -2,
+    // right: 16,
   },
   title: {
     display:"flex",
@@ -193,15 +196,15 @@ export const style = StyleSheet.create({
     height: '10%',
   },
   iconSearch: {
-    marginLeft: 45,
+    marginLeft: -5,
     alignSelf: 'center',
   },
   inputArea: {
-    width: "100%",
+    width: "80%",
+    height:"100%",
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: '#F7F7F7',
-    borderRadius: 8,
+    backgroundColor: 'transparent',
     fontFamily: 'Montserrat_500Medium',
   },
   scrowHorizontal: {
@@ -308,5 +311,6 @@ export const style = StyleSheet.create({
   },
   flatList: {
     width: '100%',
+    marginLeft:11,
   },
 });

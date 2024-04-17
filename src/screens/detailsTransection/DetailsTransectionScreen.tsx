@@ -13,7 +13,6 @@ type DetailsTransacoesRouteProp = RouteProp<RootStackParamList, 'DetailsTransect
 export const DetailsTransection = (prop: any) => {
   const route = useRoute<DetailsTransacoesRouteProp>();
   const transacao = route.params?.transacao;
-  console.log(transacao);
 
   return (
     <>
@@ -26,7 +25,7 @@ export const DetailsTransection = (prop: any) => {
           <View style={style.dash}>
             <View style={style.textDash}>
               <Text style={[style.titleDash, { left:10, }]}>Destinatário</Text>
-              <Text style={style.nameDash}>{transacao.customer.name}</Text>
+              <Text style={style.nameDash}>{transacao.customer.name.replace(/(^[^ ]* [^ ]* )(.*)/, `$1...`)}</Text>
             </View>
             <TouchableOpacity style={style.buttonNext}>
               <Icon name="right" size={20} color="#EA0356" />
@@ -35,34 +34,34 @@ export const DetailsTransection = (prop: any) => {
           <View style={style.containerDetails}>
             <View style={style.columLeft}>
               <Text style={style.titleDetails}>Valor</Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 30, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 40, color: '#000000', }]}>
                 Contrato
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 40, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 60, color: '#000000',  }]}>
                 Comissão
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 50, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 80, color: '#000000' }]}>
                 Data
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 60, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 100, color: '#000000' }]}>
                 Status
               </Text>
             </View>
             <View style={style.columRight}>
               <Text style={style.titleValue}>{`R$${transacao.value}`}</Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 10, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 25, color: '#000000' }]}>
                 {transacao.contract}
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 20, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 45, color: '#000000' }]}>
                 R${transacao.commission}
                 {`(${2}%)`}
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 30, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 65, color: '#000000' }]}>
                 {transacao.createdAt}
               </Text>
-              <Text style={[style.titleDash, { position: 'relative', top: 40, color: '#000000' }]}>
+              <Text style={[style.titleDash, { position: 'relative', top: 87, color: '#000000' }]}>
                 {transacao.status === 'COMPLETED' ? (
-                  <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <View style={{ display: 'flex', flexDirection: 'row', }}>
                     <IconMaterial name="check-circle" size={20} color="#27AE60" />
                     <Text style={{ color: '#27AE60' }}>Aprovado</Text>
                   </View>

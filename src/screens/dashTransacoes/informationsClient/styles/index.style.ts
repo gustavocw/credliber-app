@@ -33,6 +33,8 @@ export const style = StyleSheet.create({
     width: '100%',
     height: '100%',
     display: 'flex',
+    justifyContent:"center",
+    alignItems:"center"
   },
   textForm: {
     position: 'relative',
@@ -40,9 +42,13 @@ export const style = StyleSheet.create({
     width: '100%',
     height: 20,
   },
+  containerLabelInput : {
+    width:"85%",
+    height:50,
+    // backgroundColor:"black"
+  },
   label: {
     marginTop: 20,
-    marginLeft: 45,
     marginBottom: 5,
     fontSize: 12,
     fontFamily: 'Montserrat_500Medium',
@@ -62,13 +68,13 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width: 326,
+    width:"85%",
     height: 44,
     alignSelf: 'center',
   },
   containerInput: {
-    width: '95%',
-    height: 80,
+    width: '100%',
+    height: 44,
     alignSelf: 'center',
   },
   containerButton: {
@@ -89,8 +95,8 @@ export const style = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: 350,
-    height: 100,
+    width: "90%",
+    height: 80,
     alignSelf: 'center',
   },
   textFormGroup: {
@@ -120,18 +126,29 @@ export const style = StyleSheet.create({
   selectInput: {
     zIndex: 9999,
     borderWidth: 0.5,
-    borderColor: '#0C0E13',
+    borderColor: 'black',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
     marginLeft: 10,
-    width: 150,
+    width: "95%",
   },
   containerGroup: {
     width: '50%',
     height: '100%',
     display: 'flex',
     position: 'relative',
+  },
+  containerUf :{
+    width: "95%",
+    borderWidth:0.5,
+    borderColor: '#9F9F9F', 
+    height: 42,
+    display: 'flex',
+    borderRadius:8,
+    top:19,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   containerGroup2: {
     width: '50%',
@@ -141,6 +158,7 @@ export const style = StyleSheet.create({
   continueButton: {
     flex: 1,
     width: 350,
+    marginTop:10,
     alignSelf: 'center',
   },
 });
