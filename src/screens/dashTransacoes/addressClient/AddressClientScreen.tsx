@@ -50,6 +50,7 @@ export const AddressClient = () => {
     const fetchAndFillAddress = async () => {
       if (cep.length === 8) {
         await fetchAddress(cep);
+        console.log(address);
         if (address) {
           updateField('street', address.street);
           updateField('neighborhood', address.neighborhood);

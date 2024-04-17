@@ -70,7 +70,7 @@ export const DashTransacoes = () => {
       }
     });
     setTransactionCounts(monthCounts);
-  }, [chartData, months]);
+  }, [months]);
 
   useEffect(() => {
     const fetchData = async () => {

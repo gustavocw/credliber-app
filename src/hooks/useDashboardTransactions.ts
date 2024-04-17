@@ -1,7 +1,7 @@
 import { useTransactions } from '@context/useTransactions';
 import { getSimulation } from '@services/getSimulation';
 import { DataSimulation } from '@services/types/transactions.type';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export const useDashboardTransactions = (chave: any) => {
   const { chartData, transactions, formattedDates, loadTransactions } = useTransactions();
@@ -23,6 +23,7 @@ export const useDashboardTransactions = (chave: any) => {
     'Nov',
     'Dez',
   ];
+
   useEffect(() => {
     async function fetchData() {
       if (chave) {
@@ -40,10 +41,9 @@ export const useDashboardTransactions = (chave: any) => {
       }
     }
     fetchData();
-  }, [months, selectedMonth]);
+  }, []);
 
   useEffect(() => {
-    console.log('teste');
     async function fetchData() {
       if (chave) {
         try {
@@ -59,20 +59,17 @@ export const useDashboardTransactions = (chave: any) => {
       }
     }
     fetchData();
-  }, [chave]);
+  }, [chave, chartData]);
 
   useEffect(() => {
-    async function fetchData() {
-      if (transactions) {
-        try {
-          await updateMonthsBasedOnChartData();
-        } catch (error) {
-          console.error('Erro ao buscar os dados', error);
-        }
+    if (transactions) {
+      try {
+        updateMonthsBasedOnChartData();
+      } catch (error) {
+        console.error('Erro ao buscar os dados', error);
       }
     }
-    fetchData();
-  }, [chave]);
+  }, [transactions]);
 
   const updateMonthsBasedOnChartData = async () => {
     const monthIndices = chartData.map((item) => parseInt(item.date.split('-')[0], 10) - 1);
@@ -87,14 +84,14 @@ export const useDashboardTransactions = (chave: any) => {
 
   const toggleView = () => setShowInfo(!showInfo);
 
-  const filterTransactionsByMonth = () => {
+  const filterTransactionsByMonth = useCallback(() => {
     if (!selectedMonth) return transactions;
     const monthIndex = monthNames.indexOf(selectedMonth);
     return transactions.filter((transaction) => {
       const transactionDate = new Date(transaction.createdAt);
       return transactionDate.getMonth() === monthIndex;
     });
-  };
+  }, [transactions]);
 
   return {
     dataSimulation,
