@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 export const style = StyleSheet.create({
   container: {
     flex: 1,
-    width: 370,
+    width: 360,
     alignSelf: 'center',
     height: 'auto',
     paddingTop: 40,
   },
   containerHeader: {
     position: 'relative',
-    width: 350,
+    width: 360,
     alignSelf: 'center',
     height: 40,
     paddingTop: 40,
@@ -23,19 +23,18 @@ export const style = StyleSheet.create({
     height: 40,
     gap: 3,
   },
-  containerLabelTextInput:{
-    width:"94%",
+  containerLabelTextInput: {
+    width: '94%',
   },
   selectInput: {
     zIndex: 9999,
-    // borderWidth: 0.3,
     borderColor: '#9F9F9F',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    width: 350,
+    width: 360,
     height: 42,
-    marginTop:-11,
+    marginTop: -11,
     alignSelf: 'center',
   },
   typePixSelect: {
@@ -88,7 +87,7 @@ export const style = StyleSheet.create({
     width: '100%',
     height: '100%',
     display: 'flex',
-    alignItems:"center"
+    alignItems: 'center',
   },
   inputAreaPix: {
     borderWidth: 0.5,
@@ -97,7 +96,7 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width: 200,
+    width: 360,
     height: 44,
     alignSelf: 'center',
   },
@@ -108,19 +107,19 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width: 350,
+    width: 360,
     height: 44,
     alignSelf: 'center',
   },
   containerInput: {
-    width: '98%',
+    width: 360,
     borderWidth: 0.5,
     borderColor: '#0C0E13',
     borderRadius: 8,
     height: 45,
     display: 'flex',
     justifyContent: 'center',
-    marginTop:5,
+    marginTop: 5,
     alignItems: 'center',
   },
   containerButton: {
@@ -139,13 +138,13 @@ export const style = StyleSheet.create({
   },
   inputsGroup: {
     flexDirection: 'row',
-    width: 350,
+    width: 360,
     height: 100,
   },
   inputsGroupType: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 350,
+    width: 360,
     height: 100,
   },
   containerInputGroup: {
@@ -185,7 +184,7 @@ export const style = StyleSheet.create({
   },
   continueButton: {
     flex: 1,
-    width: 350,
+    width: 360,
     height: 200,
     alignSelf: 'center',
     flexDirection: 'column-reverse',

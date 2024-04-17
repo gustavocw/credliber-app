@@ -28,6 +28,7 @@ const formatDate = (dateString: string): string => {
 const ProfileScreen = () => {
   const navigation = useNavigation<ProfileScreenParam>();
   const { signOut, user, uploadPhotoReq } = useAuth();
+  const imageUrl = `https://razzo-development.b-cdn.net/${user?.profileImageUrl}`;
 
   const openImagePicker = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -63,10 +64,7 @@ const ProfileScreen = () => {
       </View>
       <View style={styles.containerPhoto}>
         <TouchableOpacity style={styles.profileImageContainer} onPress={openImagePicker}>
-          <Image
-            style={styles.profileImage}
-            source={require('@assets/icons/dash/userGeneric.png')}
-          />
+          <Image style={styles.profileImage} source={{ uri: imageUrl }} />
           <View style={styles.editIconContainer}>
             <EditIcon style={styles.editIcon} />
           </View>

@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
   container: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop:10,
+    marginTop: 10,
     width: screenWidth,
     height: screenHeight,
   },
@@ -18,6 +18,11 @@ export const style = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     height: '10%',
+  },
+  profileImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
   },
   containerPerfil: {
     display: 'flex',
@@ -53,7 +58,7 @@ export const style = StyleSheet.create({
   painel: {
     marginTop: 6,
     display: 'flex',
-    width: "85%",
+    width: '85%',
     height: 131,
     backgroundColor: '#F7F7F7',
     borderRadius: 8,
@@ -68,7 +73,7 @@ export const style = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop:10,
+    marginTop: 10,
     paddingVertical: 10,
     // backgroundColor:"black",
     gap: 10,
@@ -113,7 +118,7 @@ export const style = StyleSheet.create({
   },
   newSimulation: {
     top: 10,
-    width: "100%",
+    width: '100%',
     height: 73,
     borderRadius: 10,
     backgroundColor: '#EA0356',
@@ -123,7 +128,7 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
     width: '70%',
     height: '100%',
-    marginLeft:10,
+    marginLeft: 10,
   },
   textSimulation: {
     fontSize: 12,
@@ -158,12 +163,12 @@ export const style = StyleSheet.create({
     position: 'relative',
     top: 18,
     width: '100%',
-    height: "57%",
+    height: '57%',
     // backgroundColor:"black"
   },
-  containerTextTransacoes:{
-    width:"87%",
-    height:"100%",
+  containerTextTransacoes: {
+    width: '87%',
+    height: '100%',
     // backgroundColor:'black',
   },
   textTransacoes: {
@@ -177,21 +182,21 @@ export const style = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent:"center",
-    width: "87%",
+    justifyContent: 'center',
+    width: '87%',
     height: 47,
     backgroundColor: '#F7F7F7',
     borderRadius: 4,
-    borderWidth:0.2,
-    borderColor:"black",
+    borderWidth: 0.2,
+    borderColor: 'black',
     position: 'relative',
     top: -2,
     // right: 16,
   },
   title: {
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: '100%',
     height: '10%',
   },
@@ -200,8 +205,8 @@ export const style = StyleSheet.create({
     alignSelf: 'center',
   },
   inputArea: {
-    width: "80%",
-    height:"100%",
+    width: '80%',
+    height: '100%',
     paddingVertical: 12,
     paddingHorizontal: 16,
     backgroundColor: 'transparent',
@@ -311,6 +316,6 @@ export const style = StyleSheet.create({
   },
   flatList: {
     width: '100%',
-    marginLeft:11,
+    marginLeft: 11,
   },
 });

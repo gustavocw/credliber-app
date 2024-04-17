@@ -10,13 +10,12 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
 import { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, Text, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, Text, View } from 'react-native';
 import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { style } from './styles/index.style';
 import ListTransaction from './transactionList/transactionList';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 type DashTypeNavigation = StackNavigationProp<RootStackParamList, 'Dashboard'>;
 export const DashBoardScreen = () => {
@@ -24,6 +23,7 @@ export const DashBoardScreen = () => {
   const [showBalance, setShowBalance] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuth();
+  const imageUrl = `https://razzo-development.b-cdn.net/${user?.profileImageUrl}`;
   const { formattedDates, transactionCounts, commission, transactions, loadTransactions } =
     useTransactions();
 
@@ -62,122 +62,118 @@ export const DashBoardScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <SafeAreaView edges={['right', 'bottom', 'left', 'top']} style={{ flex:1 }}>
-      <View style={style.container}>
-        <View style={style.containerTopDash}>
-          <View style={style.containerPerfil}>
-            <View style={style.containerImagePerfil}>
-              <TouchableOpacity onPress={() => navigator.navigate('Profile')}>
-                <Icon
-                  //   src={`https://razzo-development.b-cdn.net/${user?.profileImageUrl}`}
-                  name="account-circle"
-                  size={60}
-                  color="#333"
-                />
+      <SafeAreaView edges={['right', 'bottom', 'left', 'top']} style={{ flex: 1 }}>
+        <View style={style.container}>
+          <View style={style.containerTopDash}>
+            <View style={style.containerPerfil}>
+              <View style={style.containerImagePerfil}>
+                <TouchableOpacity onPress={() => navigator.navigate('Profile')}>
+                  <Image style={style.profileImage} source={{ uri: imageUrl }} />
+                </TouchableOpacity>
+              </View>
+              <Text style={style.textName}>{user?.name}</Text>
+            </View>
+            <View style={style.containerIcons}>
+              <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
+                {showBalance ? <EyeOff style={style.icons} /> : <EyeOn style={style.icons} />}
               </TouchableOpacity>
             </View>
-            <Text style={style.textName}>{user?.name}</Text>
           </View>
-          <View style={style.containerIcons}>
-            <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
-              {showBalance ? <EyeOff style={style.icons} /> : <EyeOn style={style.icons} />}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={style.painel}>
-          <View style={style.headerCard}>
-            <Text style={style.textComission}>Comissão</Text>
-            <View style={style.saque}>
-              <Text style={style.textSaque}>Sacar agora </Text>
-              <RightArrow style={style.seta} />
-            </View>
-          </View>
-          <View style={style.centerCard}>
-            <Text style={style.saldo}>{showBalance ? '**.***,**' : `${valueFormatted}`}</Text>
-          </View>
-          <View style={style.bottomCard}>
-            <Text style={style.textBottom}>
-              {showBalance ? '****** a liberar' : `${valuePendingFormated} a liberar`}
-            </Text>
-          </View>
-        </View>
-        <TouchableOpacity
-          style={style.newSimulation}
-          onPress={() => navigator.navigate('Simulation')}>
-          <View style={style.containerButtonSimulation}>
-            <View style={style.textSimulationContainer}>
-              <Text style={style.textSimulation}>Nova simulação</Text>
-              <Text style={style.descriptionSimulation}>Simule uma transferência em minutos </Text>
-            </View>
-            <View style={style.buttonAdd}>
-              <MoreIcon style={style.iconAdd} />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <View style={style.containerTransacoes}>
-          <View style={style.title}>
-            <View style={style.containerTextTransacoes}>
-              <Text style={style.textTransacoes}>TRANSAÇÕES</Text>
-            </View>
-          </View>
-          <View style={style.inputSearch}>
-            <SearchIcon style={style.iconSearch} />
-            <TextInput
-              placeholder="Pesquisar cliente"
-              style={style.inputArea}
-              onChangeText={setSearchTerm}
-              value={searchTerm}
-            />
-          </View>
-          <View style={style.containerScrow}>
-            <FlatList
-              data={transactionTypes}
-              renderItem={({ item }) => {
-                return (
-                  <>
-                    <View style={style.itemsScrow}>
-                      <Text style={style.textBoxes}>
-                        {item.name} {`(${item.count})`}
-                      </Text>
-                    </View>
-                  </>
-                );
-              }}
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              keyExtractor={(item) => item.key}
-            />
-          </View>
-          <View style={style.transacoesHoje}>
-            {transactions.length === 0 ? (
-              <View
-                style={{
-                  height: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <LoadingSpinner />
+          <View style={style.painel}>
+            <View style={style.headerCard}>
+              <Text style={style.textComission}>Comissão</Text>
+              <View style={style.saque}>
+                <Text style={style.textSaque}>Sacar agora </Text>
+                <RightArrow style={style.seta} />
               </View>
-            ) : (
+            </View>
+            <View style={style.centerCard}>
+              <Text style={style.saldo}>{showBalance ? '**.***,**' : `${valueFormatted}`}</Text>
+            </View>
+            <View style={style.bottomCard}>
+              <Text style={style.textBottom}>
+                {showBalance ? '****** a liberar' : `${valuePendingFormated} a liberar`}
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity
+            style={style.newSimulation}
+            onPress={() => navigator.navigate('Simulation')}>
+            <View style={style.containerButtonSimulation}>
+              <View style={style.textSimulationContainer}>
+                <Text style={style.textSimulation}>Nova simulação</Text>
+                <Text style={style.descriptionSimulation}>
+                  Simule uma transferência em minutos{' '}
+                </Text>
+              </View>
+              <View style={style.buttonAdd}>
+                <MoreIcon style={style.iconAdd} />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <View style={style.containerTransacoes}>
+            <View style={style.title}>
+              <View style={style.containerTextTransacoes}>
+                <Text style={style.textTransacoes}>TRANSAÇÕES</Text>
+              </View>
+            </View>
+            <View style={style.inputSearch}>
+              <SearchIcon style={style.iconSearch} />
+              <TextInput
+                placeholder="Pesquisar cliente"
+                style={style.inputArea}
+                onChangeText={setSearchTerm}
+                value={searchTerm}
+              />
+            </View>
+            <View style={style.containerScrow}>
               <FlatList
-                data={formattedDates}
-                style={style.flatList}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ index }) => {
+                data={transactionTypes}
+                renderItem={({ item }) => {
                   return (
                     <>
-                      <Text style={style.textDates}>{formattedDates[index]}</Text>
-                      <ListTransaction transactions={transactions} style={style} />
+                      <View style={style.itemsScrow}>
+                        <Text style={style.textBoxes}>
+                          {item.name} {`(${item.count})`}
+                        </Text>
+                      </View>
                     </>
                   );
                 }}
+                showsHorizontalScrollIndicator={false}
+                horizontal
+                keyExtractor={(item) => item.key}
               />
-            )}
+            </View>
+            <View style={style.transacoesHoje}>
+              {transactions.length === 0 ? (
+                <View
+                  style={{
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <LoadingSpinner />
+                </View>
+              ) : (
+                <FlatList
+                  data={formattedDates}
+                  style={style.flatList}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ index }) => {
+                    return (
+                      <>
+                        <Text style={style.textDates}>{formattedDates[index]}</Text>
+                        <ListTransaction transactions={transactions} style={style} />
+                      </>
+                    );
+                  }}
+                />
+              )}
+            </View>
           </View>
         </View>
-      </View>
       </SafeAreaView>
-      
     </KeyboardAvoidingView>
   );
 };

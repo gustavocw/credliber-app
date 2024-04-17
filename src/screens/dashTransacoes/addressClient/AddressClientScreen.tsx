@@ -6,12 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
 import { Address, ClientData } from '@services/types/users.type';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 type RegisterScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Password'>;
 
@@ -20,6 +20,7 @@ export const AddressClient = () => {
   const { dataClient, setDataClient } = useTransactions();
   const { address, fetchAddress } = useFetchAddress();
   const [cep, setCep] = useState(dataClient.address.zipCode || '');
+  const [fetched, setFetched] = useState(false);
 
   console.log(dataClient);
 
@@ -47,125 +48,132 @@ export const AddressClient = () => {
     }));
   };
 
-  useEffect(() => {
-    const fetchAndFillAddress = async () => {
-      if (cep.length === 8) {
-        await fetchAddress(cep);
-        console.log(address);
-        if (address) {
-          updateField('street', address.street);
-          updateField('neighborhood', address.neighborhood);
-          updateField('city', address.city);
-          updateField('state', address.state);
-        }
+  const handleFetchAddress = useCallback(async () => {
+    if (cep.length === 8 && !fetched) {
+      await fetchAddress(cep);
+      if (address) {
+        setDataClient((prev) => ({
+          ...prev,
+          address: {
+            ...prev.address,
+            ...address,
+          },
+        }));
+        setFetched(true);
       }
-    };
-    fetchAndFillAddress();
-  }, [cep]);
+    }
+  }, [cep, fetched, fetchAddress, setDataClient]);
 
-  const handleChangeCep = () => {
-    updateField('zipCode', cep);
+  useEffect(() => {
+    handleFetchAddress();
+  }, [cep, handleFetchAddress]);
+
+  const handleChangeCep = (newCep: string) => {
+    if (newCep !== cep) {
+      setCep(newCep);
+      setFetched(false);
+    }
   };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <SafeAreaView edges={[ 'bottom', 'left', 'right', 'top' ]}>
-      <ScrollView keyboardShouldPersistTaps="handled">
-        <View style={style.container}>
-          <View style={style.containerHeader}>
-            <View style={style.containerHeaderProgresso}>
-              <ProgressBar progress={1} />
-              <ProgressBar progress={calculateProgress()} />
-              <ProgressBar progress={0} />
+      <SafeAreaView edges={['bottom', 'left', 'right', 'top']}>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <View style={style.container}>
+            <View style={style.containerHeader}>
+              <View style={style.containerHeaderProgresso}>
+                <ProgressBar progress={1} />
+                <ProgressBar progress={calculateProgress()} />
+                <ProgressBar progress={0} />
+              </View>
+              <View style={style.titleContainer}>
+                <ButtonBack title="Endereço do cliente" subTitle="" />
+              </View>
             </View>
-            <View style={style.titleContainer}>
-              <ButtonBack title="Endereço do cliente" subTitle="" />
+            <View style={style.form}>
+              <View style={style.containerLabelInput}>
+                <Text style={style.label}>CEP</Text>
+              </View>
+              <TextInput
+                keyboardType="numeric"
+                placeholder="00000-000"
+                placeholderTextColor="#9F9F9F"
+                style={style.input}
+                value={cep}
+                onChangeText={setCep}
+                onBlur={() => handleChangeCep}
+              />
+              <View style={style.containerLabelInput}>
+                <Text style={style.label}>Endereço</Text>
+              </View>
+              <TextInput
+                placeholder="Seu endereço"
+                placeholderTextColor="#9F9F9F"
+                style={style.input}
+                value={dataClient.address.street}
+                onChangeText={(value) => updateField('street', value)}
+              />
+              <View style={style.row}>
+                <View style={style.halfInputContainer}>
+                  <Text style={style.label2}>Número</Text>
+                  <TextInput
+                    keyboardType="numeric"
+                    placeholder="Nº"
+                    placeholderTextColor="#9F9F9F"
+                    style={style.halfInput}
+                    value={dataClient.address.number}
+                    onChangeText={(value) => updateField('number', value)}
+                  />
+                </View>
+                <View style={style.halfInputContainer}>
+                  <Text style={style.label2}>Complemento</Text>
+                  <TextInput
+                    placeholder="Apto, bloco, etc."
+                    placeholderTextColor="#9F9F9F"
+                    style={style.halfInput}
+                    value={dataClient.address.complement}
+                    onChangeText={(value) => updateField('complement', value)}
+                  />
+                </View>
+              </View>
+              <View style={style.containerLabelInput}>
+                <Text style={style.label}>Bairro</Text>
+              </View>
+              <TextInput
+                placeholder="Bairro"
+                placeholderTextColor="#9F9F9F"
+                style={style.input}
+                value={dataClient.address.neighborhood}
+                onChangeText={(value) => updateField('neighborhood', value)}
+              />
+              <View style={style.row}>
+                <View style={style.halfInputContainer}>
+                  <Text style={style.label2}>Cidade</Text>
+                  <TextInput
+                    placeholder="Cidade"
+                    placeholderTextColor="#9F9F9F"
+                    style={style.halfInput}
+                    value={dataClient.address.city}
+                    onChangeText={(value) => updateField('city', value)}
+                  />
+                </View>
+                <View style={style.halfInputContainer}>
+                  <Text style={style.label2}>UF</Text>
+                  <TextInput
+                    placeholder="UF"
+                    placeholderTextColor="#9F9F9F"
+                    style={style.halfInput}
+                    value={dataClient.address.state}
+                    onChangeText={(value) => updateField('state', value)}
+                  />
+                </View>
+              </View>
+              <View style={[style.buttonNext, { marginLeft: 270 }]}>
+                <ContinueButton navigation={navigation} navigateTo="DataBanks" />
+              </View>
             </View>
           </View>
-          <View style={style.form}>
-            <View style={style.containerLabelInput}>
-              <Text style={style.label}>CEP</Text>
-            </View>
-            <TextInput
-              keyboardType="numeric"
-              placeholder="00000-000"
-              placeholderTextColor="#9F9F9F"
-              style={style.input}
-              value={cep}
-              onChangeText={setCep}
-              onBlur={() => handleChangeCep()}
-            />
-            <View style={style.containerLabelInput}>
-               <Text style={style.label}>Endereço</Text>
-            </View>
-            <TextInput
-              placeholder="Seu endereço"
-              placeholderTextColor="#9F9F9F"
-              style={style.input}
-              value={dataClient.address.street}
-              onChangeText={(value) => updateField('street', value)}
-            />
-            <View style={style.row}>
-              <View style={style.halfInputContainer}>
-                <Text style={style.label2}>Número</Text>
-                <TextInput
-                  keyboardType="numeric"
-                  placeholder="Nº"
-                  placeholderTextColor="#9F9F9F"
-                  style={style.halfInput}
-                  value={dataClient.address.number}
-                  onChangeText={(value) => updateField('number', value)}
-                />
-              </View>
-              <View style={style.halfInputContainer}>
-                <Text style={style.label2}>Complemento</Text>
-                <TextInput
-                  placeholder="Apto, bloco, etc."
-                  placeholderTextColor="#9F9F9F"
-                  style={style.halfInput}
-                  value={dataClient.address.complement}
-                  onChangeText={(value) => updateField('complement', value)}
-                />
-              </View>
-            </View>
-            <View style={style.containerLabelInput}>
-               <Text style={style.label}>Bairro</Text>
-            </View>
-            <TextInput
-              placeholder="Bairro"
-              placeholderTextColor="#9F9F9F"
-              style={style.input}
-              value={dataClient.address.neighborhood}
-              onChangeText={(value) => updateField('neighborhood', value)}
-            />
-            <View style={style.row}>
-              <View style={style.halfInputContainer}>
-                <Text style={style.label2}>Cidade</Text>
-                <TextInput
-                  placeholder="Cidade"
-                  placeholderTextColor="#9F9F9F"
-                  style={style.halfInput}
-                  value={dataClient.address.city}
-                  onChangeText={(value) => updateField('city', value)}
-                />
-              </View>
-              <View style={style.halfInputContainer}>
-                <Text style={style.label2}>UF</Text>
-                <TextInput
-                  placeholder="UF"
-                  placeholderTextColor="#9F9F9F"
-                  style={style.halfInput}
-                  value={dataClient.address.state}
-                  onChangeText={(value) => updateField('state', value)}
-                />
-              </View>
-            </View>
-            <View style={[style.buttonNext, { marginLeft:270, }]}>
-              <ContinueButton navigation={navigation} navigateTo="DataBanks" />
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

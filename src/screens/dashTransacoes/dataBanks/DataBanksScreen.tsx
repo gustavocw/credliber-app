@@ -11,12 +11,10 @@ import RNPickerSelect from 'react-native-picker-select';
 import { banks } from './bankList';
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
-import CheckboxCred from '../components/checkBoxCred';
 type InformationsScreen = StackNavigationProp<RootStackParamList, 'InformationsClient'>;
 export const DataBanks = () => {
   const navigation = useNavigation<InformationsScreen>();
   const { dataClient, setDataClient } = useTransactions();
-  const typePix = [{ label: 'Email', value: 'email' }];
 
   const totalFields = 6;
   const calculateProgress = () => {
@@ -41,14 +39,6 @@ export const DataBanks = () => {
     }));
   };
 
-  const handlePoupança = (value: number) => {
-    if (value === 1) {
-      updateField('accountType', 'CP');
-    } else {
-      updateField('accountType', 'CC');
-    }
-  };
-
   return (
     <ScrollView style={{ flex: 1, width: 'auto' }} keyboardShouldPersistTaps="handled">
       <View style={style.container}>
@@ -63,15 +53,6 @@ export const DataBanks = () => {
           </View>
         </View>
         <View style={style.form}>
-          <View style={style.inputsGroup}>
-            <View>
-              <Text style={style.label}>Tipo de conta</Text>
-              <View style={style.inputAreaGroupCheck}>
-                <CheckboxCred label="    Poupança" onCheck={() => handlePoupança(1)} />
-                <CheckboxCred  label="   Conta corrente" onCheck={() => handlePoupança(2)} />
-            </View>
-            </View>
-          </View>
           <View style={style.containerLabelTextInput}>
             <Text style={style.label}>Banco</Text>
           </View>
@@ -111,18 +92,7 @@ export const DataBanks = () => {
               </View>
             </View>
           </View>
-          {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View>
-              <RNPickerSelect
-                onValueChange={(value: string) => updateField('pixType', value)}
-                items={typePix.map((typePix) => ({ label: typePix.label, value: typePix.value }))}
-                placeholder={{ label: 'Tipo', value: null }}
-                style={{
-                  inputIOS: style.typePixSelect,
-                  inputAndroid: style.typePixSelect,
-                }}
-              />
-            </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View>
               <Text style={style.label}>Chave Pix</Text>
               <View style={style.containerInput}>
@@ -133,7 +103,7 @@ export const DataBanks = () => {
                 />
               </View>
             </View>
-          </View> */}
+          </View>
         </View>
       </View>
       <View style={style.continueButton}>
