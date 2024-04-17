@@ -10,6 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 type InformationsScreen = StackNavigationProp<RootStackParamList, 'InformationsClient'>;
 type InformationsScreenData = RouteProp<RootStackParamList, 'InformationsClient'>;
 
@@ -42,6 +43,7 @@ export const InformationsClient = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <SafeAreaView edges={[ 'bottom', 'left', 'right', 'top' ]}>
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={style.container}>
           <View style={style.containerHeader}>
@@ -161,6 +163,7 @@ export const InformationsClient = () => {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };

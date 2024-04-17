@@ -11,6 +11,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } fro
 
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type RegisterScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Password'>;
 
@@ -67,6 +68,7 @@ export const AddressClient = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <SafeAreaView edges={[ 'bottom', 'left', 'right', 'top' ]}>
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={style.container}>
           <View style={style.containerHeader}>
@@ -80,7 +82,9 @@ export const AddressClient = () => {
             </View>
           </View>
           <View style={style.form}>
-            <Text style={style.label}>CEP</Text>
+            <View style={style.containerLabelInput}>
+              <Text style={style.label}>CEP</Text>
+            </View>
             <TextInput
               keyboardType="numeric"
               placeholder="00000-000"
@@ -90,7 +94,9 @@ export const AddressClient = () => {
               onChangeText={setCep}
               onBlur={() => handleChangeCep()}
             />
-            <Text style={style.label}>Endereço</Text>
+            <View style={style.containerLabelInput}>
+               <Text style={style.label}>Endereço</Text>
+            </View>
             <TextInput
               placeholder="Seu endereço"
               placeholderTextColor="#9F9F9F"
@@ -121,7 +127,9 @@ export const AddressClient = () => {
                 />
               </View>
             </View>
-            <Text style={style.label}>Bairro</Text>
+            <View style={style.containerLabelInput}>
+               <Text style={style.label}>Bairro</Text>
+            </View>
             <TextInput
               placeholder="Bairro"
               placeholderTextColor="#9F9F9F"
@@ -151,12 +159,13 @@ export const AddressClient = () => {
                 />
               </View>
             </View>
-            <View style={style.buttonNext}>
+            <View style={[style.buttonNext, { marginLeft:270, }]}>
               <ContinueButton navigation={navigation} navigateTo="DataBanks" />
             </View>
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };

@@ -6,7 +6,8 @@ export const style = StyleSheet.create({
     flex: 1,
     width: screenWidth,
     height: 'auto',
-    paddingVertical: 80,
+    paddingVertical: 40,
+    paddingBottom:60,
   },
   containerHeader: {
     position: 'relative',
@@ -31,7 +32,7 @@ export const style = StyleSheet.create({
     position: 'relative',
     top: 50,
     width: '100%',
-    height: '100%',
+    height: '99%',
     display: 'flex',
     justifyContent:"center",
     alignItems:"center"
