@@ -53,11 +53,11 @@ export const DashBoardScreen = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (searchTerm) {
-      loadTransactions({ search: searchTerm });
-    }
-  }, [searchTerm]);
+  const filteredTransactions = searchTerm
+    ? transactions.filter((transaction) =>
+        transaction.customer.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : transactions;
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -164,7 +164,7 @@ export const DashBoardScreen = () => {
                   return (
                     <>
                       <Text style={style.textDates}>{formattedDates[index]}</Text>
-                      <ListTransaction transactions={transactions} style={style} />
+                      <ListTransaction transactions={filteredTransactions} style={style} />
                     </>
                   );
                 }}

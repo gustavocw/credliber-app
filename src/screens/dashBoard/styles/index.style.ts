@@ -226,7 +226,7 @@ export const style = StyleSheet.create({
   },
   textBoxes: {
     color: '#9F9F9F',
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: 'Montserrat_600SemiBold',
   },
   transacoesHoje: {

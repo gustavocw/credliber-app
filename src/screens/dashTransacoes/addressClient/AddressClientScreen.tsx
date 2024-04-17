@@ -60,7 +60,7 @@ export const AddressClient = () => {
       }
     };
     fetchAndFillAddress();
-  }, [cep]);
+  }, []);
 
   const handleChangeCep = () => {
     updateField('zipCode', cep);
