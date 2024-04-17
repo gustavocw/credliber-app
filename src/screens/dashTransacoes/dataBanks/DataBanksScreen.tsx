@@ -15,16 +15,15 @@ type InformationsScreen = StackNavigationProp<RootStackParamList, 'InformationsC
 export const DataBanks = () => {
   const navigation = useNavigation<InformationsScreen>();
   const { dataClient, setDataClient } = useTransactions();
+  console.log(dataClient);
 
-  const totalFields = 6;
+  const totalFields = 4;
   const calculateProgress = () => {
     let filledFields = 0;
     filledFields += dataClient.bankAccount.bank ? 1 : 0;
     filledFields += dataClient.bankAccount.account ? 1 : 0;
-    filledFields += dataClient.bankAccount.accountType ? 1 : 0;
     filledFields += dataClient.bankAccount.agency ? 1 : 0;
     filledFields += dataClient.bankAccount.pixKey ? 1 : 0;
-    filledFields += dataClient.bankAccount.pixType ? 1 : 0;
 
     return filledFields / totalFields;
   };
@@ -108,7 +107,7 @@ export const DataBanks = () => {
           </View>
         </View>
         <View style={style.continueButton}>
-          <ContinueButton navigation={navigation} navigateTo="?" />
+          <ContinueButton navigation={navigation} navigateTo="ProposalData" data={dataClient} />
         </View>
       </View>
     </ScrollView>

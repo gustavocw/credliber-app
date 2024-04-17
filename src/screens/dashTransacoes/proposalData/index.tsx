@@ -22,6 +22,7 @@ export const ProposalData = () => {
   const route = useRoute<ProposalDataRouteProp>();
   const dataTransaction = route.params?.data;
   const navigation = useNavigation<ProposalDataScreenNavigationProp>();
+  console.log(dataTransaction);
 
   const renderUserData = () => {
     if (!dataTransaction) return <Loading />;
