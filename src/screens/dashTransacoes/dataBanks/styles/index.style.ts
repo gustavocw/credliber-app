@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const screenHeight = Dimensions.get('window').height;
 export const style = StyleSheet.create({
   container: {
     flex: 1,
+    height: screenHeight,
     width: 360,
     alignSelf: 'center',
-    height: 'auto',
     paddingTop: 40,
   },
   containerHeader: {
@@ -185,7 +185,6 @@ export const style = StyleSheet.create({
   continueButton: {
     flex: 1,
     width: 360,
-    height: 200,
     alignSelf: 'center',
     flexDirection: 'column-reverse',
     paddingVertical: 20,

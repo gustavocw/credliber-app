@@ -34,7 +34,7 @@ export const style = StyleSheet.create({
     width: 350,
     height: '95%',
     display: 'flex',
-    alignItems:"center",
+    alignItems: 'center',
     alignSelf: 'center',
     gap: 10,
   },
@@ -54,10 +54,10 @@ export const style = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     color: 'black',
   },
-  containerLabelInput:{
-      width:"97%",
-      height:15,
-      // backgroundColor:'black'
+  containerLabelInput: {
+    width: '97%',
+    height: 15,
+    // backgroundColor:'black'
   },
   input: {
     borderWidth: 0.5,
@@ -66,7 +66,7 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width: "97%",
+    width: '97%',
     height: 44,
     alignSelf: 'center',
   },
@@ -78,7 +78,7 @@ export const style = StyleSheet.create({
     justifyContent: 'center',
   },
   halfInputContainer: {
-    width: "47%",
+    width: '47%',
     display: 'flex',
     alignSelf: 'center',
   },

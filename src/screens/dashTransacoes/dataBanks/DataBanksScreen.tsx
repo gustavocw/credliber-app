@@ -42,72 +42,74 @@ export const DataBanks = () => {
   return (
     <ScrollView style={{ flex: 1, width: 'auto' }} keyboardShouldPersistTaps="handled">
       <View style={style.container}>
-        <View style={style.containerHeader}>
-          <View style={style.containerHeaderProgresso}>
-            <ProgressBar progress={1} />
-            <ProgressBar progress={1} />
-            <ProgressBar progress={calculateProgress()} />
+        <View style={{ flex: 1 }}>
+          <View style={style.containerHeader}>
+            <View style={style.containerHeaderProgresso}>
+              <ProgressBar progress={1} />
+              <ProgressBar progress={1} />
+              <ProgressBar progress={calculateProgress()} />
+            </View>
+            <View style={style.titleContainer}>
+              <ButtonBack title="Dados bancários do cliente" subTitle="" />
+            </View>
           </View>
-          <View style={style.titleContainer}>
-            <ButtonBack title="Dados bancários do cliente" subTitle="" />
+          <View style={style.form}>
+            <View style={style.containerLabelTextInput}>
+              <Text style={style.label}>Banco</Text>
+            </View>
+            <View style={style.containerInput}>
+              <RNPickerSelect
+                onValueChange={(value: string) => updateField('bank', value)}
+                items={banks.map((bank) => ({ label: bank.label, value: bank.value }))}
+                placeholder={{ label: 'Selecione o banco', value: null }}
+                style={{
+                  inputIOS: style.selectInput,
+                  inputAndroid: style.selectInput,
+                }}
+              />
+            </View>
+            <View style={style.inputsGroupType}>
+              <View>
+                <Text style={style.label2}>Agência</Text>
+                <View style={style.containerInputGroup}>
+                  <TextInput
+                    onChangeText={(value) => updateField('agency', value)}
+                    style={[style.inputAreaGroup]}
+                    keyboardType="numeric"
+                    placeholder="0000"
+                  />
+                </View>
+              </View>
+              <View>
+                <Text style={style.label2}>Conta</Text>
+                <View style={style.containerInputGroup}>
+                  <TextInput
+                    onChangeText={(value) => updateField('account', value)}
+                    style={style.inputAreaGroup}
+                    keyboardType="numeric"
+                    placeholder="000000-0"
+                  />
+                  <View />
+                </View>
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View>
+                <Text style={style.label}>Chave Pix</Text>
+                <View style={style.containerInput}>
+                  <TextInput
+                    onChangeText={(value) => updateField('pixKey', value)}
+                    placeholder="Insira uma chave pix válida"
+                    style={style.inputAreaPix}
+                  />
+                </View>
+              </View>
+            </View>
           </View>
         </View>
-        <View style={style.form}>
-          <View style={style.containerLabelTextInput}>
-            <Text style={style.label}>Banco</Text>
-          </View>
-          <View style={style.containerInput}>
-            <RNPickerSelect
-              onValueChange={(value: string) => updateField('bank', value)}
-              items={banks.map((bank) => ({ label: bank.label, value: bank.value }))}
-              placeholder={{ label: 'Selecione o banco', value: null }}
-              style={{
-                inputIOS: style.selectInput,
-                inputAndroid: style.selectInput,
-              }}
-            />
-          </View>
-          <View style={style.inputsGroupType}>
-            <View>
-              <Text style={style.label2}>Agência</Text>
-              <View style={style.containerInputGroup}>
-                <TextInput
-                  onChangeText={(value) => updateField('agency', value)}
-                  style={[style.inputAreaGroup]}
-                  keyboardType="numeric"
-                  placeholder="0000"
-                />
-              </View>
-            </View>
-            <View>
-              <Text style={style.label2}>Conta</Text>
-              <View style={style.containerInputGroup}>
-                <TextInput
-                  onChangeText={(value) => updateField('account', value)}
-                  style={style.inputAreaGroup}
-                  keyboardType="numeric"
-                  placeholder="000000-0"
-                />
-                <View />
-              </View>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View>
-              <Text style={style.label}>Chave Pix</Text>
-              <View style={style.containerInput}>
-                <TextInput
-                  onChangeText={(value) => updateField('pixKey', value)}
-                  placeholder="Insira uma chave pix válida"
-                  style={style.inputAreaPix}
-                />
-              </View>
-            </View>
-          </View>
+        <View style={style.continueButton}>
+          <ContinueButton navigation={navigation} navigateTo="?" />
         </View>
-      </View>
-      <View style={style.continueButton}>
-        <ContinueButton navigation={navigation} navigateTo="?" />
       </View>
     </ScrollView>
   );
