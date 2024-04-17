@@ -2,16 +2,18 @@ import { GetUserOutput } from './users.type';
 
 export interface AllTransactions {
   transactions: Transaction[];
+  statitics: Statitics;
   total: number;
   skip: number;
   limit: number;
   sort: string;
 }
 
-export interface TransactionCounts {
+export interface Statitics {
   completed: number;
   pending: number;
   refused: number;
+  total: number;
 }
 
 export interface Transaction {

@@ -5,7 +5,7 @@ import {
   Transaction,
   TransactionChartParams,
   TransactionQueryParams,
-  TransactionCounts,
+  Statitics,
   TransactionData,
 } from '@services/types/transactions.type';
 import { ClientData } from '@services/types/users.type';
@@ -24,7 +24,7 @@ interface TransactionsContextData {
   chartData: TransactionData[];
   commission: Comission | undefined;
   formattedDates: string[];
-  transactionCounts: TransactionCounts;
+  transactionCounts: Statitics;
   loadTransactions: (queryParams?: TransactionQueryParams) => Promise<void>;
   loadChartTransactions: (queryParams?: TransactionChartParams) => Promise<void>;
 }
@@ -36,10 +36,11 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [chartData, setChartData] = useState<TransactionData[]>([]);
   const [commission, setCommission] = useState<Comission>();
   const [formattedDates, setFormattedDates] = useState<string[]>([]);
-  const [transactionCounts, setTransactionCounts] = useState<TransactionCounts>({
+  const [transactionCounts, setTransactionCounts] = useState<Statitics>({
     completed: 0,
     pending: 0,
     refused: 0,
+    total: 0,
   });
   const [dataClient, setDataClient] = useState<ClientData>({
     name: '',
@@ -95,8 +96,10 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     try {
       const allTransactions = await getAllTransactions({
         customerIds: queryParams?.customerIds,
+        search: queryParams?.search,
       });
       setTransactions(allTransactions.transactions);
+      setTransactionCounts(allTransactions.statitics);
 
       const uniqueDates = new Set(
         allTransactions.transactions.map((transaction) =>
@@ -106,14 +109,6 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
         )
       );
       setFormattedDates([...uniqueDates]);
-
-      const counts = { completed: 0, pending: 0, refused: 0 };
-      allTransactions.transactions.forEach((transaction) => {
-        if (transaction.status === 'COMPLETED') counts.completed += 1;
-        else if (transaction.status === 'PENDING') counts.pending += 1;
-        else if (transaction.status === 'REFUSED') counts.refused += 1;
-      });
-      setTransactionCounts(counts);
 
       if (user && user._id) {
         const commission = await getCommission(user._id);

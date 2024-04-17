@@ -34,7 +34,6 @@ export const getAllTransactions = async ({
   }).catch((error) => {
     throw error;
   });
-
   return response.data;
 };
 
