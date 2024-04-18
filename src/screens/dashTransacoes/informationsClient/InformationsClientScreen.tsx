@@ -1,13 +1,20 @@
-import ContinueButton from '@components/buttonNext';
 import { ButtonBack } from '@components/returnScreen/buttonBack';
 import { useTransactions } from '@context/useTransactions';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
-import { Text, ScrollView, KeyboardAvoidingView, Platform, View } from 'react-native';
+import {
+  Text,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import RNPickerSelect from 'react-native-picker-select';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
@@ -18,9 +25,9 @@ const states = ['SP', 'RJ'];
 export const InformationsClient = () => {
   const navigation = useNavigation<InformationsScreen>();
   const route = useRoute<InformationsScreenData>();
-  const data = route.params?.data;
+  const valueSimulation = route.params?.value;
   const { dataClient, setDataClient } = useTransactions();
-  console.log('AQUI', data);
+  console.log('AQUI', valueSimulation);
 
   const totalFields = 8;
   const calculateProgress = () => {
@@ -158,7 +165,11 @@ export const InformationsClient = () => {
                 />
               </View>
               <View style={style.continueButton}>
-                <ContinueButton navigation={navigation} navigateTo="AddressClient" />
+                <TouchableOpacity
+                  style={style.buttonNext}
+                  onPress={() => navigation.navigate('AddressClient', { value: valueSimulation })}>
+                  <Icon name="rightcircle" size={50} color="#EA0356" />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

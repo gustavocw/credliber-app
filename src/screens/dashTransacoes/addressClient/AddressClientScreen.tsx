@@ -1,19 +1,28 @@
-import ContinueButton from '@components/buttonNext';
 import { ButtonBack } from '@components/returnScreen/buttonBack';
 import { useTransactions } from '@context/useTransactions';
 import { useFetchAddress } from '@hooks/validateCep';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
 import { Address, ClientData } from '@services/types/users.type';
 import { useCallback, useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
 
-type RegisterScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Password'>;
+type RegisterScreenNavigationProps = StackNavigationProp<RootStackParamList, 'AddressClient'>;
+type AdressRouteProp = RouteProp<RootStackParamList, 'AddressClient'>;
 
 export const AddressClient = () => {
   const navigation = useNavigation<RegisterScreenNavigationProps>();
@@ -21,8 +30,9 @@ export const AddressClient = () => {
   const { address, fetchAddress } = useFetchAddress();
   const [cep, setCep] = useState(dataClient.address.zipCode || '');
   const [fetched, setFetched] = useState(false);
-
-  console.log(dataClient);
+  const route = useRoute<AdressRouteProp>();
+  const valueSimulation = route.params?.value;
+  console.log(valueSimulation);
 
   const totalFields = 7;
   const calculateProgress = () => {
@@ -169,7 +179,11 @@ export const AddressClient = () => {
                 </View>
               </View>
               <View style={[style.buttonNext, { marginLeft: 270 }]}>
-                <ContinueButton navigation={navigation} navigateTo="DataBanks" />
+                <TouchableOpacity
+                  style={style.buttonNext}
+                  onPress={() => navigation.navigate('DataBanks', { value: valueSimulation })}>
+                  <Icon name="rightcircle" size={50} color="#EA0356" />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

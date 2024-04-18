@@ -1,21 +1,25 @@
-import ContinueButton from '@components/buttonNext';
 import { ButtonBack } from '@components/returnScreen/buttonBack';
 import { useTransactions } from '@context/useTransactions';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
 import { BankAccount, ClientData } from '@services/types/users.type';
-import { ScrollView, Text, TextInput, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 import { banks } from './bankList';
 import { style } from './styles/index.style';
 import ProgressBar from '../components/ProgressBar';
-type InformationsScreen = StackNavigationProp<RootStackParamList, 'InformationsClient'>;
+type InformationsScreen = StackNavigationProp<RootStackParamList, 'DataBanks'>;
+type DataBankRouteProp = RouteProp<RootStackParamList, 'DataBanks'>;
+
 export const DataBanks = () => {
   const navigation = useNavigation<InformationsScreen>();
   const { dataClient, setDataClient } = useTransactions();
-  console.log(dataClient);
+  const route = useRoute<DataBankRouteProp>();
+  const valueSimulation = route.params?.value;
+  console.log(valueSimulation);
 
   const totalFields = 4;
   const calculateProgress = () => {
@@ -107,7 +111,11 @@ export const DataBanks = () => {
           </View>
         </View>
         <View style={style.continueButton}>
-          <ContinueButton navigation={navigation} navigateTo="ProposalData" data={dataClient} />
+          <TouchableOpacity
+            style={style.buttonNext}
+            onPress={() => navigation.navigate('ProposalData', { value: valueSimulation })}>
+            <Icon name="rightcircle" size={50} color="#EA0356" />
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

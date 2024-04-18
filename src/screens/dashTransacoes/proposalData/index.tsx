@@ -1,6 +1,7 @@
 import ArrowRightWhite from '@assets/icons/dash/arrowRightWhite';
 import Loading from '@components/loading';
 import { ButtonBack } from '@components/returnScreen/buttonBack';
+import { useTransactions } from '@context/useTransactions';
 import { useRoute, RouteProp, useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '@routes';
 import React from 'react';
@@ -21,35 +22,53 @@ type ProposalDataScreenNavigationProp = NavigationProp<RootStackParamList, 'Prop
 export const ProposalData = () => {
   const route = useRoute<ProposalDataRouteProp>();
   const dataTransaction = route.params?.data;
+  const valueTransaction = route.params?.value;
   const navigation = useNavigation<ProposalDataScreenNavigationProp>();
-  console.log(dataTransaction);
+  const { dataClient } = useTransactions();
+  console.log(dataTransaction, dataClient);
 
   const renderUserData = () => {
-    if (!dataTransaction) return <Loading />;
+    if (!dataTransaction && !dataClient) return <Loading />;
 
-    const { customer } = dataTransaction;
-    const formattedBirthDate = new Date(customer.birthDate).toLocaleDateString('pt-BR');
+    const isTransactionData = !!dataTransaction;
+    const userData = isTransactionData ? dataTransaction.customer : dataClient;
+    const formattedBirthDate = isTransactionData
+      ? new Date(userData.birthDate).toLocaleDateString('pt-BR')
+      : userData.birthDate;
     const userFields = [
-      { label: 'Nome', value: customer.name },
-      { label: 'CPF', value: customer.cpf },
-      { label: 'RG', value: customer.rg },
-      { label: 'Data de emissão', value: new Date(customer.createdAt).toLocaleDateString('pt-BR') },
-      { label: 'Banco', value: customer.bankAccount.bank },
-      { label: 'Agência', value: customer.bankAccount.agency },
-      { label: 'Conta', value: customer.bankAccount.account },
-      { label: 'Chave Pix', value: customer.bankAccount.pixKey },
+      { label: 'Nome', value: userData.name },
+      { label: 'CPF', value: userData.cpf },
+      { label: 'RG', value: userData.rg },
+      {
+        label: 'Data de emissão',
+        value:
+          isTransactionData && 'createdAt' in userData
+            ? new Date(userData.createdAt).toLocaleDateString('pt-BR')
+            : null,
+      },
+      { label: 'Banco', value: userData.bankAccount.bank },
+      { label: 'Agência', value: userData.bankAccount.agency },
+      { label: 'Conta', value: userData.bankAccount.account },
+      { label: 'Chave Pix', value: userData.bankAccount.pixKey },
       { label: 'Data de Nascimento', value: formattedBirthDate },
-      { label: 'Email', value: customer.email },
-      { label: 'Telefone', value: customer.phone },
+      { label: 'Email', value: userData.email },
+      {
+        label: 'Telefone',
+        value: isTransactionData && 'phone' in userData ? userData.phone : null,
+      },
       {
         label: 'Endereço',
-        value: `${customer.address.street}, ${customer.address.number} - ${customer.address.state}`,
+        value: `${userData.address.street}, ${userData.address.number} - ${userData.address.state}`,
       },
     ];
 
+    const filteredUserFields = userFields.filter(
+      (field) => field.value !== null && field.value !== undefined
+    );
+
     return (
       <FlatList
-        data={userFields}
+        data={filteredUserFields}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
             <Text style={styles.textListSimple}>{item.label}</Text>
@@ -66,7 +85,10 @@ export const ProposalData = () => {
         style: 'currency',
         currency: 'BRL',
       })
-    : '';
+    : (valueTransaction ? valueTransaction / 100 : 0).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      });
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>

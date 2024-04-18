@@ -7,7 +7,7 @@ export const style = StyleSheet.create({
     width: screenWidth,
     height: 'auto',
     paddingVertical: 40,
-    paddingBottom:60,
+    paddingBottom: 60,
   },
   containerHeader: {
     position: 'relative',
@@ -34,8 +34,8 @@ export const style = StyleSheet.create({
     width: '100%',
     height: '99%',
     display: 'flex',
-    justifyContent:"center",
-    alignItems:"center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textForm: {
     position: 'relative',
@@ -43,9 +43,9 @@ export const style = StyleSheet.create({
     width: '100%',
     height: 20,
   },
-  containerLabelInput : {
-    width:"85%",
-    height:50,
+  containerLabelInput: {
+    width: '85%',
+    height: 50,
     // backgroundColor:"black"
   },
   label: {
@@ -69,7 +69,7 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     color: 'black',
-    width:"85%",
+    width: '85%',
     height: 44,
     alignSelf: 'center',
   },
@@ -96,7 +96,7 @@ export const style = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    width: "90%",
+    width: '90%',
     height: 80,
     alignSelf: 'center',
   },
@@ -132,7 +132,7 @@ export const style = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     marginLeft: 10,
-    width: "95%",
+    width: '95%',
   },
   containerGroup: {
     width: '50%',
@@ -140,14 +140,14 @@ export const style = StyleSheet.create({
     display: 'flex',
     position: 'relative',
   },
-  containerUf :{
-    width: "95%",
-    borderWidth:0.5,
-    borderColor: '#9F9F9F', 
+  containerUf: {
+    width: '95%',
+    borderWidth: 0.5,
+    borderColor: '#9F9F9F',
     height: 42,
     display: 'flex',
-    borderRadius:8,
-    top:19,
+    borderRadius: 8,
+    top: 19,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -159,7 +159,14 @@ export const style = StyleSheet.create({
   continueButton: {
     flex: 1,
     width: 350,
-    marginTop:10,
+    marginTop: 10,
     alignSelf: 'center',
+  },
+  buttonNext: {
+    width: '96%',
+    height: 60,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
 });

@@ -189,4 +189,10 @@ export const style = StyleSheet.create({
     flexDirection: 'column-reverse',
     paddingVertical: 20,
   },
+  buttonNext: {
+    marginBottom: 40,
+    paddingBottom: 20,
+    flex: 1,
+    flexDirection: 'column-reverse',
+  },
 });

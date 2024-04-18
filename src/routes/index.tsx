@@ -42,7 +42,8 @@ interface DetailsEditDataUserCustomer {
 }
 
 interface DetailsClientTransaction {
-  data: DataSimulation;
+  data?: DataSimulation;
+  value?: number;
 }
 export type RootStackParamList = {
   Initial: typeof InitialPage | undefined;
@@ -61,8 +62,8 @@ export type RootStackParamList = {
   DashboardTransacoes: { chave: string } | undefined;
   InformationsClient: DetailsClientTransaction;
   ProposalData: DetailsClientTransaction;
-  AddressClient: typeof AddressClient | undefined;
-  DataBanks: typeof DataBanks | undefined;
+  AddressClient: DetailsClientTransaction;
+  DataBanks: DetailsClientTransaction;
   DetailsTransection: DetailsTransectionParams;
   PersonalDataScreen: typeof PersonalDataScreen | undefined;
   EditAdressScreen: typeof EditAdressScreen | undefined;
