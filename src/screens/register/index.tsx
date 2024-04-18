@@ -16,6 +16,7 @@ import {
 
 import ContinueButton from './components/continueButton';
 import styles from './styles/index.styles';
+import { TextInputMask } from 'react-native-masked-text';
 
 type RegisterScreenNavigationProps = StackNavigationProp<
   RootStackParamList,
@@ -30,7 +31,8 @@ const RegisterScreen = () => {
   };
 
   const updateCpf = (cpf: string) => {
-    setDados((prev) => ({ ...prev, cpf }));
+    
+    setDados((prev) => ({ ...prev, cpf:cpf.replace(/[. -]/g, "") }));
   };
 
   const updateRg = (rg: string) => {
@@ -38,7 +40,7 @@ const RegisterScreen = () => {
   };
 
   const updateBirthDate = (birthDate: string) => {
-    setDados((prev) => ({ ...prev, birthDate }));
+    setDados((prev) => ({ ...prev, birthDate:birthDate.replace(/[. -]/g,"") }));
   };
 
   return (
@@ -63,13 +65,13 @@ const RegisterScreen = () => {
               />
               <Text style={styles.helpText}>Insira seu CPF no formato XXX.XXX.XXX-XX</Text>
               <Text style={styles.label}>CPF</Text>
-              <TextInput
-                value={dados.cpf}
-                onChangeText={updateCpf}
-                keyboardType="numeric"
+              <TextInputMask 
                 placeholder="Insira seu CPF"
                 placeholderTextColor="#9F9F9F"
                 style={styles.input}
+                type={'cpf'}
+                onChangeText={updateCpf}
+                value={dados.cpf}
               />
               <Text style={styles.helpText}>Insira seu CPF no formato XXX.XXX.XXX-XX</Text>
               <Text style={styles.label}>Número do RG</Text>
@@ -83,13 +85,13 @@ const RegisterScreen = () => {
               />
               <Text style={styles.helpText}>Insira seu RG no formato XXXXXXX-X</Text>
               <Text style={styles.label}>Data de Nascimento</Text>
-              <TextInput
-                value={dados.birthDate}
-                onChangeText={updateBirthDate}
-                keyboardType="numeric"
+              <TextInputMask 
                 placeholder="dd/mm/aaaa"
                 placeholderTextColor="#9F9F9F"
                 style={styles.input}
+                type={'datetime'}
+                value={dados.birthDate}
+                onChangeText={updateBirthDate}
               />
               <Text style={styles.helpText}>
                 Insira sua data de nascimento no formato DD/MM/AAAA

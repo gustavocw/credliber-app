@@ -63,7 +63,7 @@ export const AddressClient = () => {
   }, []);
 
   const handleChangeCep = () => {
-    updateField('zipCode', cep);
+    updateField('zipCode', cep.replace("-",""));
   };
 
   return (
@@ -91,7 +91,7 @@ export const AddressClient = () => {
               placeholderTextColor="#9F9F9F"
               style={style.input}
               value={cep}
-              onChangeText={setCep}
+              onChangeText={(e)=> e.length===5? setCep(`${e}-`):setCep(e)}
               onBlur={() => handleChangeCep()}
             />
             <View style={style.containerLabelInput}>

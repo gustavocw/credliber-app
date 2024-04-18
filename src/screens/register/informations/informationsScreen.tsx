@@ -6,6 +6,7 @@ import { View, Text, TextInput, KeyboardAvoidingView, Platform, ScrollView } fro
 
 import { styles } from './styles/index.styles';
 import ContinueButton from '../components/continueButton';
+import { TextInputMask } from 'react-native-masked-text';
 
 const Informations = () => {
   const [cep, setCep] = useState('');
@@ -21,7 +22,8 @@ const Informations = () => {
   };
 
   const updateTel = (tel: string) => {
-    setDados((prev) => ({ ...prev, phone: tel }));
+    console.log()
+    setDados((prev) => ({ ...prev, phone: tel.replace(/^[(.*?)]/g, "").replace(/([(.*?)$])/g, "").replace(/\-/, "").replace(/\s/,"") }));
   };
 
   const updateNumber = (numberHome: string) => {
@@ -45,7 +47,6 @@ const Informations = () => {
   };
 
   const handleAdressChange = async (newCep: string) => {
-    setCep(newCep);
     await fetchAddress(newCep);
     if (address) {
       setDados((prevDados) => ({
@@ -81,10 +82,14 @@ const Informations = () => {
                 onChangeText={updateEmail}
               />
               <Text style={styles.label}>Telefone/Whatsapp</Text>
-              <TextInput
-                keyboardType="numeric"
+              <TextInputMask 
                 placeholder="(00) 99999-9999"
+                options={{
+                  maskType:"BRL",
+                  withDDD:true,
+                }}
                 placeholderTextColor="#9F9F9F"
+                type={'cel-phone'}
                 style={styles.input}
                 value={dados.phone}
                 onChangeText={updateTel}
@@ -96,8 +101,8 @@ const Informations = () => {
                 placeholderTextColor="#9F9F9F"
                 style={styles.input}
                 value={cep}
-                onChangeText={handleAdressChange}
-                onBlur={() => handleAdressChange(cep)}
+                onChangeText={(value) => value.length === 5? setCep(`${value}-`):setCep(value)}
+                onBlur={() => handleAdressChange(cep.replace("-",""))}
               />
               <Text style={styles.label}>Bairro</Text>
               <TextInput
