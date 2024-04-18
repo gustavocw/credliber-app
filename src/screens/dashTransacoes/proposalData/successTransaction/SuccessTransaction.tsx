@@ -1,5 +1,6 @@
 import CheckIcon from '@assets/icons/dash/checkIcon';
 import ExitIcon from '@assets/icons/dash/exitIcon';
+import { useTransactions } from '@context/useTransactions';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@routes';
@@ -14,6 +15,9 @@ export const SuccessTransaction = () => {
   const navigation = useNavigation<SuccessParam>();
   const route = useRoute<DetailsSuccessTransactionRouteProp>();
   const transacao = route.params?.data;
+  const { dataClient } = useTransactions();
+  const isTransactionData = !!transacao && !dataClient;
+  const userData = isTransactionData ? transacao.customer : dataClient;
   const formattedValue = transacao
     ? (transacao.value / 100).toLocaleString('pt-BR', {
         style: 'currency',
@@ -48,7 +52,7 @@ export const SuccessTransaction = () => {
               <Text style={style.value}>{formattedValue}</Text>
               <View style={{ flexDirection: 'row', width: 370 }}>
                 <Text style={style.toName}>Para </Text>
-                <Text style={style.name}>{transacao?.customer.name}</Text>
+                <Text style={style.name}>{userData.name}</Text>
               </View>
             </View>
           </View>

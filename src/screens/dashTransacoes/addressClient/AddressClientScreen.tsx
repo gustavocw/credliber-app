@@ -31,7 +31,8 @@ export const AddressClient = () => {
   const [cep, setCep] = useState(dataClient.address.zipCode || '');
   const [fetched, setFetched] = useState(false);
   const route = useRoute<AdressRouteProp>();
-  const valueSimulation = route.params?.value;
+  const dataTransaction = route.params?.data;
+  const valueSimulation = route.params?.data?.value;
   console.log(valueSimulation);
 
   const totalFields = 7;
@@ -181,7 +182,7 @@ export const AddressClient = () => {
               <View style={[style.buttonNext, { marginLeft: 270 }]}>
                 <TouchableOpacity
                   style={style.buttonNext}
-                  onPress={() => navigation.navigate('DataBanks', { value: valueSimulation })}>
+                  onPress={() => navigation.navigate('DataBanks', { data: dataTransaction })}>
                   <Icon name="rightcircle" size={50} color="#EA0356" />
                 </TouchableOpacity>
               </View>

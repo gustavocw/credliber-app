@@ -56,7 +56,7 @@ export const DashTransacoes = () => {
     if (!dataSimulation.customer) {
       navigation.navigate('ProposalData', { data: dataSimulation });
     } else {
-      navigation.navigate('InformationsClient', { value: dataSimulation.value });
+      navigation.navigate('InformationsClient', { data: dataSimulation });
     }
   };
 

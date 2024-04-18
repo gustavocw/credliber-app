@@ -22,15 +22,14 @@ type ProposalDataScreenNavigationProp = NavigationProp<RootStackParamList, 'Prop
 export const ProposalData = () => {
   const route = useRoute<ProposalDataRouteProp>();
   const dataTransaction = route.params?.data;
-  const valueTransaction = route.params?.value;
+  const valueTransaction = route.params?.data?.value;
   const navigation = useNavigation<ProposalDataScreenNavigationProp>();
   const { dataClient } = useTransactions();
-  console.log(dataTransaction, dataClient);
 
   const renderUserData = () => {
     if (!dataTransaction && !dataClient) return <Loading />;
 
-    const isTransactionData = !!dataTransaction;
+    const isTransactionData = !!dataTransaction && !dataClient;
     const userData = isTransactionData ? dataTransaction.customer : dataClient;
     const formattedBirthDate = isTransactionData
       ? new Date(userData.birthDate).toLocaleDateString('pt-BR')

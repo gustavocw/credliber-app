@@ -25,9 +25,8 @@ const states = ['SP', 'RJ'];
 export const InformationsClient = () => {
   const navigation = useNavigation<InformationsScreen>();
   const route = useRoute<InformationsScreenData>();
-  const valueSimulation = route.params?.value;
+  const dataTransaction = route.params?.data;
   const { dataClient, setDataClient } = useTransactions();
-  console.log('AQUI', valueSimulation);
 
   const totalFields = 8;
   const calculateProgress = () => {
@@ -167,7 +166,7 @@ export const InformationsClient = () => {
               <View style={style.continueButton}>
                 <TouchableOpacity
                   style={style.buttonNext}
-                  onPress={() => navigation.navigate('AddressClient', { value: valueSimulation })}>
+                  onPress={() => navigation.navigate('AddressClient', { data: dataTransaction })}>
                   <Icon name="rightcircle" size={50} color="#EA0356" />
                 </TouchableOpacity>
               </View>

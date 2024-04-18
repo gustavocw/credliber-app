@@ -194,5 +194,6 @@ export const style = StyleSheet.create({
     paddingBottom: 20,
     flex: 1,
     flexDirection: 'column-reverse',
+    alignSelf: 'flex-end',
   },
 });

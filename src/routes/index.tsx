@@ -43,7 +43,6 @@ interface DetailsEditDataUserCustomer {
 
 interface DetailsClientTransaction {
   data?: DataSimulation;
-  value?: number;
 }
 export type RootStackParamList = {
   Initial: typeof InitialPage | undefined;

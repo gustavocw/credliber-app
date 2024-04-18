@@ -18,7 +18,8 @@ export const DataBanks = () => {
   const navigation = useNavigation<InformationsScreen>();
   const { dataClient, setDataClient } = useTransactions();
   const route = useRoute<DataBankRouteProp>();
-  const valueSimulation = route.params?.value;
+  const valueSimulation = route.params?.data?.value;
+  const dataTransaction = route.params?.data;
   console.log(valueSimulation);
 
   const totalFields = 4;
@@ -113,7 +114,7 @@ export const DataBanks = () => {
         <View style={style.continueButton}>
           <TouchableOpacity
             style={style.buttonNext}
-            onPress={() => navigation.navigate('ProposalData', { value: valueSimulation })}>
+            onPress={() => navigation.navigate('ProposalData', { data: dataTransaction })}>
             <Icon name="rightcircle" size={50} color="#EA0356" />
           </TouchableOpacity>
         </View>
