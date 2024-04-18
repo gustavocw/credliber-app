@@ -19,7 +19,12 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
   const [dados, setDados] = useState<RegisterDados>({
     name: '',
     cpf: '',
-    rg: '',
+    rg: {
+      number: 0,
+      uf: '',
+      org: '',
+      date: '',
+    },
     email: '',
     phone: '',
     birthDate: '',
@@ -39,6 +44,7 @@ export const RegisterProvider = ({ children }: { children: React.ReactNode }) =>
       accountType: '',
       pixKey: '',
       payDay: 0,
+      pixType: '',
     },
     password: '',
   });

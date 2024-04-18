@@ -44,6 +44,11 @@ export interface Team {
   name: string;
 }
 
+export interface ClientDataExport {
+  name: string;
+  cpf: string;
+}
+
 export interface DataSimulation {
   customer: GetUserOutput;
   value: number;

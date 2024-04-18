@@ -45,7 +45,7 @@ export interface GetUserOutput {
   _id: string;
   name: string;
   cpf?: string;
-  rg?: string;
+  rg?: Rg;
   email: string;
   profileImageUrl: string;
   phone: string;
@@ -75,7 +75,7 @@ export interface GetUserOutput {
 export interface SignUpInput {
   name: string;
   cpf: string;
-  rg: string;
+  rg?: Rg;
   email: string;
   phone: string;
   birthDate: string;
@@ -161,7 +161,7 @@ export interface BankAccount {
 export interface RegisterDados {
   name: string;
   cpf: string;
-  rg: string;
+  rg?: Rg;
   email: string;
   phone: string;
   birthDate: string;
@@ -170,10 +170,17 @@ export interface RegisterDados {
   password: string;
 }
 
+export interface Rg {
+  number: number;
+  uf: string;
+  org: string;
+  date: string;
+}
+
 export interface ClientData {
   name: string;
   cpf: string;
-  rg: string;
+  rg?: Rg;
   email: string;
   phone: string;
   birthDate: string;

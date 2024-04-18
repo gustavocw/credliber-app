@@ -3,8 +3,10 @@ import ApiInstance from '@libs/axios';
 import {
   AllTransactions,
   ChartTransaction,
+  ClientDataExport,
   TransactionQueryParams,
 } from './types/transactions.type';
+import { ClientData } from './types/users.type';
 
 export const getAllTransactions = async ({
   startDate,
@@ -55,6 +57,14 @@ export const getChartTransactons = async ({
       customerIds: customerIds?.join(','),
     },
   }).catch((error) => {
+    throw error;
+  });
+
+  return response.data;
+};
+
+export const createCustomer = async (input: ClientData): Promise<ClientDataExport> => {
+  const response = await ApiInstance.post<ClientDataExport>('/customer', input).catch((error) => {
     throw error;
   });
 

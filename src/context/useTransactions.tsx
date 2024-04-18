@@ -45,7 +45,12 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [dataClient, setDataClient] = useState<ClientData>({
     name: '',
     cpf: '',
-    rg: '',
+    rg: {
+      number: 0,
+      uf: '',
+      org: '',
+      date: '',
+    },
     email: '',
     phone: '',
     birthDate: '',

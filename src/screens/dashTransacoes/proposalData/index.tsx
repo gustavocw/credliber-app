@@ -37,7 +37,7 @@ export const ProposalData = () => {
     const userFields = [
       { label: 'Nome', value: userData.name },
       { label: 'CPF', value: userData.cpf },
-      { label: 'RG', value: userData.rg },
+      { label: 'RG', value: userData.rg?.number },
       {
         label: 'Data de emissão',
         value:
@@ -79,6 +79,10 @@ export const ProposalData = () => {
     );
   };
 
+  const handleSendTransaction = () => {
+    navigation.navigate('SuccessTransaction', { data: dataTransaction });
+  };
+
   const formattedValue = dataTransaction
     ? (dataTransaction.value / 100).toLocaleString('pt-BR', {
         style: 'currency',
@@ -105,9 +109,7 @@ export const ProposalData = () => {
             <TouchableOpacity style={styles.buttonEdit}>
               <Text style={styles.textListSimple}>Editar dados</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('SuccessTransaction', { data: dataTransaction })}
-              style={styles.continueButton}>
+            <TouchableOpacity onPress={() => handleSendTransaction()} style={styles.continueButton}>
               <View style={styles.continueButtonContent}>
                 <Text style={styles.continueButtonText}>Confirmar e realizar proposta</Text>
                 <ArrowRightWhite style={styles.arrow} />
