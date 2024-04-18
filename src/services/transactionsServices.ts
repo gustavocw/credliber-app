@@ -5,6 +5,8 @@ import {
   ChartTransaction,
   ClientDataExport,
   TransactionQueryParams,
+  withdraw,
+  withdrawSuccess,
 } from './types/transactions.type';
 import { ClientData } from './types/users.type';
 
@@ -65,6 +67,14 @@ export const getChartTransactons = async ({
 
 export const createCustomer = async (input: ClientData): Promise<ClientDataExport> => {
   const response = await ApiInstance.post<ClientDataExport>('/customer', input).catch((error) => {
+    throw error;
+  });
+
+  return response.data;
+};
+
+export const requestWithdraw = async (input: withdraw): Promise<withdrawSuccess> => {
+  const response = await ApiInstance.post<withdrawSuccess>('/transaction', input).catch((error) => {
     throw error;
   });
 

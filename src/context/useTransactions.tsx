@@ -1,5 +1,10 @@
 import { getCommission } from '@services/comissionServices';
-import { getAllTransactions, getChartTransactons } from '@services/transactionsServices';
+import {
+  createCustomer,
+  getAllTransactions,
+  getChartTransactons,
+  requestWithdraw,
+} from '@services/transactionsServices';
 import { Comission } from '@services/types/commission.type';
 import {
   Transaction,
@@ -7,6 +12,8 @@ import {
   TransactionQueryParams,
   Statitics,
   TransactionData,
+  withdraw,
+  ClientDataExport,
 } from '@services/types/transactions.type';
 import { ClientData } from '@services/types/users.type';
 import { format, parseISO } from 'date-fns';
@@ -25,6 +32,8 @@ interface TransactionsContextData {
   commission: Comission | undefined;
   formattedDates: string[];
   transactionCounts: Statitics;
+  customerCreate: (input: ClientData) => Promise<ClientDataExport>;
+  makeWithdraw: (input: withdraw) => Promise<void>;
   loadTransactions: (queryParams?: TransactionQueryParams) => Promise<void>;
   loadChartTransactions: (queryParams?: TransactionChartParams) => Promise<void>;
 }
@@ -97,6 +106,16 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
     console.log(allChart);
   };
 
+  const customerCreate = async (input: ClientData): Promise<ClientDataExport> => {
+    const create = await createCustomer(input);
+    return create;
+  };
+
+  const makeWithdraw = async (inputWithdraw: withdraw) => {
+    const withdraw = await requestWithdraw(inputWithdraw);
+    console.log(withdraw);
+  };
+
   const loadTransactions = async (queryParams?: TransactionQueryParams) => {
     try {
       const allTransactions = await getAllTransactions({
@@ -136,6 +155,8 @@ export const TransactionsProvider: React.FC<{ children: React.ReactNode }> = ({ 
         transactionCounts,
         loadTransactions,
         loadChartTransactions,
+        customerCreate,
+        makeWithdraw,
       }}>
       {children}
     </TransactionsContext.Provider>

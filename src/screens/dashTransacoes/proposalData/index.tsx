@@ -4,6 +4,7 @@ import { ButtonBack } from '@components/returnScreen/buttonBack';
 import { useTransactions } from '@context/useTransactions';
 import { useRoute, RouteProp, useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '@routes';
+import { withdraw } from '@services/types/transactions.type';
 import React from 'react';
 import {
   KeyboardAvoidingView,
@@ -24,7 +25,7 @@ export const ProposalData = () => {
   const dataTransaction = route.params?.data;
   const valueTransaction = route.params?.data?.value;
   const navigation = useNavigation<ProposalDataScreenNavigationProp>();
-  const { dataClient } = useTransactions();
+  const { dataClient, customerCreate, makeWithdraw } = useTransactions();
 
   const renderUserData = () => {
     if (!dataTransaction && !dataClient) return <Loading />;
@@ -79,8 +80,26 @@ export const ProposalData = () => {
     );
   };
 
-  const handleSendTransaction = () => {
-    navigation.navigate('SuccessTransaction', { data: dataTransaction });
+  const handleSendTransaction = async () => {
+    const dataWithdraw: withdraw = {
+      value: 0,
+      customerId: '',
+    };
+
+    if (dataClient) {
+      const createResult = await customerCreate(dataClient);
+      if (createResult !== undefined) {
+        dataWithdraw.value = dataTransaction?.value;
+        dataWithdraw.customerId = createResult?.cpf;
+      }
+    } else {
+      dataWithdraw.value = dataTransaction?.value;
+      dataWithdraw.customerId = dataTransaction?.customer.cpf;
+    }
+    const result = await makeWithdraw(dataWithdraw);
+    if (result !== undefined) {
+      navigation.navigate('SuccessTransaction', { data: dataTransaction });
+    }
   };
 
   const formattedValue = dataTransaction

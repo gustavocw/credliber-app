@@ -87,3 +87,17 @@ export interface TransactionData {
   total: number;
   count: number;
 }
+
+export interface withdraw {
+  value?: number;
+  customerId?: string;
+}
+
+export interface withdrawSuccess {
+  _id: string;
+  value: number;
+  customer: {
+    id: string;
+    name: string;
+  };
+}
