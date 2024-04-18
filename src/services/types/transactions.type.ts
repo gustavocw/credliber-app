@@ -45,6 +45,7 @@ export interface Team {
 }
 
 export interface ClientDataExport {
+  id: string;
   name: string;
   cpf: string;
 }

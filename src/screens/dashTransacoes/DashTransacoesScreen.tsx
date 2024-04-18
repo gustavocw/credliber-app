@@ -126,7 +126,7 @@ export const DashTransacoes = () => {
     const userFields = [
       { label: 'Nome', value: customer.name, editable: false },
       { label: 'CPF', value: customer.cpf, editable: false },
-      { label: 'RG', value: customer.rg, editable: false },
+      { label: 'RG', value: customer.rg?.number, editable: false },
       {
         label: 'Data de emissão',
         value: new Date(customer.createdAt).toLocaleDateString('pt-BR'),

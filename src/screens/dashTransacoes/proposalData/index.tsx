@@ -80,25 +80,36 @@ export const ProposalData = () => {
     );
   };
 
-  const handleSendTransaction = async () => {
+  const handleSendTransaction = async (): Promise<void> => {
     const dataWithdraw: withdraw = {
-      value: 0,
+      value: dataTransaction?.value || 0,
       customerId: '',
     };
 
-    if (dataClient) {
-      const createResult = await customerCreate(dataClient);
-      if (createResult !== undefined) {
-        dataWithdraw.value = dataTransaction?.value;
-        dataWithdraw.customerId = createResult?.cpf;
+    try {
+      if (dataClient) {
+        const createResult = await customerCreate(dataClient);
+        if (createResult && createResult.id) {
+          dataWithdraw.customerId = createResult.id;
+          console.log('Cliente criado sem cadastro anterior.');
+        } else {
+          throw new Error('Failed to create customer');
+        }
+      } else if (dataTransaction?.customer?._id) {
+        dataWithdraw.customerId = dataTransaction.customer._id;
+      } else {
+        throw new Error('No customer data available');
       }
-    } else {
-      dataWithdraw.value = dataTransaction?.value;
-      dataWithdraw.customerId = dataTransaction?.customer.cpf;
-    }
-    const result = await makeWithdraw(dataWithdraw);
-    if (result !== undefined) {
-      navigation.navigate('SuccessTransaction', { data: dataTransaction });
+
+      const result = await makeWithdraw(dataWithdraw);
+      console.log(result);
+      if (result !== null) {
+        navigation.navigate('SuccessTransaction', { data: dataTransaction });
+      } else {
+        throw new Error('Withdrawal failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
