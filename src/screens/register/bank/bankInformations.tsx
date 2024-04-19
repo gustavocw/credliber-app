@@ -64,7 +64,7 @@ const BankInformations = () => {
       ...prevDados,
       bankAccount: {
         ...prevDados.bankAccount,
-        agency: value,
+        agency: value.replace("-",""),
       },
     }));
   };
@@ -80,6 +80,7 @@ const BankInformations = () => {
   };
 
   const updatePixKey = (value: string) => {
+    
     setDados((prevDados) => ({
       ...prevDados,
       bankAccount: {
@@ -122,7 +123,7 @@ const BankInformations = () => {
                     placeholder="0000-0"
                     placeholderTextColor="#9F9F9F"
                     value={dados.bankAccount.agency}
-                    onChangeText={updateAgency}
+                    onChangeText={(value)=> value.length === 4? updateAgency(`${value}-`):updateAgency(value)}
                     style={styles.halfInput}
                   />
                 </View>
@@ -133,7 +134,7 @@ const BankInformations = () => {
                     placeholder="0000000-0"
                     placeholderTextColor="#9F9F9F"
                     value={dados.bankAccount.account}
-                    onChangeText={updateAccountBank}
+                    onChangeText={value => value.length === 7? updateAccountBank(`${value}-`):updateAccountBank(value)}
                     style={styles.halfInput}
                   />
                 </View>

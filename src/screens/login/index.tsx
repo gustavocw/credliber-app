@@ -24,6 +24,7 @@ import Swiper from 'react-native-swiper';
 import * as Yup from 'yup';
 
 import styles from './styles/index.styles';
+import { TextInputMask } from 'react-native-masked-text';
 type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Login'>;
 const ASYNC_STORAGE_USER = 'credliber_auth_user';
 const ASYNC_STORAGE_LOGIN = 'credliber_auth_user_login';
@@ -64,9 +65,8 @@ const LoginScreen = () => {
       validationSchema,
       onSubmit: async (values: SignInInput) => {
         try {
-          console.log("AAAAAAAAAAA")
           // await signIn(values);
-          // await AsyncStorage.setItem(ASYNC_STORAGE_LOGIN, values.cpf || '');
+          // await AsyncStorage.setItem(ASYNC_STORAGE_LOGIN, values.cpf?.replace(/[. -]/g, "") || '');
           navigation.navigate('Dashboard');
         } catch (error) {
           console.error(error);
@@ -74,7 +74,6 @@ const LoginScreen = () => {
       },
       enableReinitialize: true,
     });
-
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView keyboardShouldPersistTaps="handled">
@@ -127,11 +126,11 @@ const LoginScreen = () => {
                         <Text style={styles.errorText}>{errors.cpf}</Text>
                       )}
                     </View>
-                    <TextInput
-                      keyboardType="numeric"
+                    <TextInputMask 
                       placeholder="000.000.000-00"
                       placeholderTextColor="#9F9F9F"
                       style={styles.input}
+                      type={'cpf'}
                       onChangeText={handleChange('cpf')}
                       onBlur={handleBlur('cpf')}
                       value={values.cpf}
